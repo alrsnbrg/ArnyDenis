@@ -1,0 +1,1023 @@
+%version of 10-31-02
+
+\documentstyle[IJFCS]{article}
+ 
+\input preamble
+
+\includeonly{}
+\input psfig
+\input epsf
+\epsfverbosetrue
+\newcommand\hvcite[1]{[\refcite{#1}]}
+
+%\renewcommand{\theequation}{\arabic{equation}}
+%\renewcommand{\thesection}{\arabic{section}}
+%\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+%\newtheorem{theorem}{Theorem}[section]
+%\newtheorem{lemma}{Lemma}[section]
+\newtheorem{prop}{Proposition}[section]
+ 
+\renewcommand{\theprop}{\thesection.\arabic{prop}}
+\renewcommand{\thelemma}{\thesection.\arabic{lemma}}
+\renewcommand{\thetheorem}{\thesection.\arabic{theorem}}
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+
+%\usepackage{epsfig}
+
+\begin{document}
+%% print out the publisher copyright heading
+\copyrightheading
+ 
+%% use symbolic footnote
+\symbolfootnote
+ 
+%% use normal text like skip (13pt)
+\textlineskip
+ 
+\begin{center}
+ 
+\fcstitle{Efficient Pairing Functions---and Why You Should Care}
+
+\vspace{24pt}
+ 
+{\authorfont Arnold L. Rosenberg\footnote{\tt rsnbrg@cs.umass.edu}}
+ 
+\vspace{2pt}
+
+\smalllineskip
+{\addressfont Dept.~of Computer Science, Univ.~of Massachusetts \\
+        Amherst, MA 01003, USA}
+
+\end{center}
+ 
+\alphfootnote
+
+\begin{abstract}
+This paper provides a short guided tour through the world of {\em
+pairing functions}---bijections between $\N \times \N$ and $\N$---as
+models for computational ``situations.''  After a short discussion of
+the computationally simplest pairing functions---the Cauchy-Cantor
+``diagonal'' polynomials---we describe in detail two specific
+computational situations where pairing functions give an unexpectedly
+simple handle on apparently complex systems-related problems.  (1) We
+discuss the use of pairing functions as storage mappings for
+rectangular arrays/tables that are {\em extendible}, in the sense that
+the programmer may expand and shrink them dynamically.  (2) We discuss
+the use of pairing functions as the basis for a mechanism for
+instilling {\em accountability} into Web-computing projects, by
+linking remote ``volunteers'' to the tasks they compute.
+\keywords{Pairing function, storing extendible arrays/tables,
+accountability in web computing}
+\end{abstract}
+
+\section{Introduction}
+
+\setcounter{equation}{0}
+
+\subsection{Motivation}
+
+\begin{center}
+{\it Entia non sunt multiplicanda praeter necessitatem.} \\
+\hspace*{3in}{\footnotesize {\bf Occam's Razor}}
+\end{center}
+
+\noindent
+This famous admonition by William of Occam (14th cent.) to strive for
+simplicity is worth heeding when seeking mathematical models of
+computational phenomena.  In this spirit, we describe examples of the
+use of {\it pairing functions} ({\it PF}s, for short)---bijections
+between $\N \times \N$ and $\N$, where $\N$ is the set of positive
+integers---as the basis for such models.  The utility of PFs in myriad
+disparate situations resides in their allowing one to slip gracefully
+between one- and two-dimensional worldviews---and, by iteration, among
+worldviews of arbitrary finite dimensionalities.  Our emphasis is on
+the varied structures that PFs can enjoy, which allow one to use PFs
+to model a broad range of quite disparate computational situations,
+including their associated natural measures of efficiency.  After due
+obeisance to the importance of PFs in foundational studies (in the
+next subsection), we turn in Section~\ref{s.diag} to a short
+discussion of the computationally simplest PFs, the Cauchy-Cantor
+polynomials, whose charming mathematical structure---see
+(\ref{e.diag})---begs one to ask if other such polynomials exist.
+This question remains unresolved, but there has been nontrivial
+progress toward a (thus far) negative answer.  In the remainder of the
+paper, we focus on PFs in more ``modern'' computational situations,
+discussing just two situations that will hopefully convince the reader
+of the utility of PFs as a modeling device.  (1) We discuss the use of
+PFs as storage mappings for rectangular arrays/tables that are {\it
+extendible}, in that the programmer can expand and shrink them
+dynamically (Section~\ref{s.arrays}); our focus is on storage mappings
+that store arrays/tables ``compactly.''  (2) We discuss the use of PFs
+as the basis for a mechanism for instilling {\em accountability} into
+Web-computing projects, by linking ``volunteers'' to the tasks they
+compute (Section~\ref{s.webcomp}); our focus is on PFs that map each
+``row'' of $\N \times \N$ to an arithmetic progression.  During our
+short tour, we shall encounter several intriguing and challenging
+problems that remain open, despite the apparent simplicity of PFs.
+
+\subsection{Background}
+
+PFs have played a major role in a variety of ``classical'' studies.
+They played a pivotal role in Cantor's seminal study of infinities
+\cite{Cantor78}, supplying a rigorous formal basis for asserting the
+counterintuitive ``equinumerousness'' of the integers and the
+rationals.  It took revolutionary thinkers such as G\"{o}del and
+Turing to recognize that the correspondences embodied by PFs can be
+viewed as {\em encodings}, or {\em translations}, of ordered pairs
+(and, thence, of arbitrary finite tuples or strings) as integers.
+This insight allowed G\"{o}del and Turing to build on the existence of
+eminently computable---indeed, easily computed---PFs in their famous
+studies of, respectively, logical systems \cite{Godel31} and
+algorithmic systems \cite{Turing36}.  The uses we propose for PFs,
+while certainly less profound than these two, also build on the
+insight that PFs can be used as encoding mechanisms, specifically
+allowing one to slip gracefully among worlds of strings, integers, and
+tuples of integers.
+
+Throughout the paper, we illustrate selected values from selected PFs
+using the following convention.  We illustrate a PF $\f: \N \times \N
+\leftrightarrow \N$ via a two-dimensional array whose entries are the
+values of $\f$ as described in Fig.~\ref{f.generic}.
+
+\begin{figure}[htb]
+\[ \begin{array}{c|c|c|c|c|c}
+\f(1,1) & \f(1,2) & \f(1,3) & \f(1,4) & \f(1,5) & \cdots \\
+\f(2,1) & \f(2,2) & \f(2,3) & \f(2,4) & \f(2,5) & \cdots \\
+\f(3,1) & \f(3,2) & \f(3,3) & \f(3,4) & \f(3,5) & \cdots \\
+\f(4,1) & \f(4,2) & \f(4,3) & \f(4,4) & \f(4,5) & \cdots \\
+\f(5,1) & \f(5,2) & \f(5,3) & \f(5,4) & \f(5,5) & \cdots \\
+\vdots  & \vdots  & \vdots  & \vdots  & \vdots  & \ddots
+\end{array} \]
+\caption{{\it Our generic template for sampling from a PF.}
+\label{f.generic}}
+\end{figure}
+
+\section{The Prettiest Pairing Function(s)}
+\label{s.diag}
+
+\setcounter{equation}{0}
+
+\begin{figure}[htb]
+\begin{center}
+\begin{tabular}{r|r|r|r|r|r|r|r|r}
+ 1 &  3 &  6 & 10 & \fbox{15} &  21 &  28 &  36 & $\cdots$ \\
+ 2 &  5 &  9 & \fbox{14} & 20 &  27 &  35 &  44 & $\cdots$ \\
+ 4 &  8 & \fbox{13} & 19 & 26 &  34 &  43 &  53 & $\cdots$ \\
+ 7 & \fbox{12} & 18 & 25 & 33 &  42 &  52 &  63 & $\cdots$ \\
+\fbox{11} & 17 & 24 & 32 & 41 &  51 &  62 &  74 & $\cdots$ \\
+16 & 23 & 31 & 40 & 50 &  61 &  73 &  86 & $\cdots$ \\
+22 & 30 & 39 & 49 & 60 &  72 &  85 &  99 & $\cdots$ \\
+29 & 38 & 48 & 59 & 71 &  84 &  98 & 113 & $\cdots$ \\
+$\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ &
+  $\vdots$ & $\vdots$ & $\ddots$
+\end{tabular}
+\end{center}
+\caption{{\it The diagonal PF $\d$.  The shell $x+y = 6$ is
+highlighted.}
+\label{f.diag}}
+\end{figure}
+
+\noindent
+It has been known for almost two centuries that there exist bijections
+between $\N \times \N$ and $\N$.  Indeed, it has been known for at
+least 125 years that there exist such bijections that are {\em
+polynomials}.  Cauchy \cite{Cauchy21} pictorially describes, and
+Cantor \cite{Cantor78} symbolically specifies, the {\it Diagonal} PF
+\begin{equation}
+\label{e.diag}
+\d(x, y) \ = \ {{x+y-1} \choose 2} + y 
+\end{equation}
+(which, of course, has a twin obtained by exchanging $x$ and $y$); see
+Fig.~\ref{f.diag}.  A simple double induction based on the fact that
+$\d$ maps integers in an ``upward direction'' along the ``diagonal
+shells,'' $x+y = 2, \ x+y = 3, \ x+y = 4, \ \ldots$, proves that the
+function $\d$ is, indeed, a bijection.  A computationally more
+satisfying proof in \cite{Davis58} presents an explicit recipe for
+computing $\d$'s inverse.
+
+\paragraph{Is $\d$ the only polynomial PF?}
+It is so intriguing that there exists a PF that is a {\em polynomial}
+that the question of $\d$'s uniqueness (as a {\em polynomial} PF) is
+irresistible!  This question remains largely open, but there are a few
+nontrivial beginnings to an answer.
+\begin{enumerate}
+\item
+There is no quadratic polynomial PF other than $\d$ (and its twin)
+\cite{FueterP23}.
+\item
+The preceding assertion remains true if the ``onto'' condition for
+bijections is replaced by a ``unit density'' condition
+\cite{LewR78a}.
+\item
+No cubic or quartic polynomial is a PF \cite{LewR78b}.
+\item
+The development in \cite{LewR78b} excludes large classes of
+higher-degree polynomials from being PFs---a simple example: a
+super-quadratic polynomial whose coefficients are all positive cannot
+be a PF.
+\end{enumerate}
+
+The proofs of the preceding results combine geometric number theory
+with nonstandard diophantine analysis.  (Standard diophantine analysis
+studies the existence of {\em any} integer solution to a polynomial
+equation and the existence of {\em infinitely many} integer solutions;
+it does not address the existence of {\em a unique} integer solution.)
+For instance, the lead terms of any super-quadratic polynomial $\f$
+grow faster than the quadratic growth of the plane, hence must leave
+large gaps in their ranges.  To prove that such an $\f$ cannot be a
+PF, one must show that $\f$'s lower-degree terms do not lead to large
+``troughs'' that capture all of the integers that its lead terms miss.
+The cases that must be eliminated grow quickly in number with the
+degree of $\f$---cf.~\cite{LewR78b}---yet in principle provide no
+impenetrable barrier to the ultimate resolution of the question.
+
+\section{Pairing Functions and Array/Table Storage}
+\label{s.arrays}
+
+\setcounter{equation}{0}
+
+It has been recognized since the 1950s that many classes of
+computations, ranging in origin from linear-algebraic scientific
+applications to (relational) databases, benefit from the ability to
+reshape multidimensional arrays and tables dynamically.  While several
+programming languages allow a user to specify at least some types of
+reshapings---say, the addition and/or deletion of rows and/or columns
+in two dimensions---the language processors I am aware of implement
+the capability quite naively, by completely remapping an array/table
+with each reshaping.  This is, of course, very wasteful of time, since
+one does $\Omega(n^2)$ work to accommodate $O(n)$ changes.
+
+In the mid-1970s, I began to study the use of PFs as storage-mapping
+functions for two-dimensional rectangular arrays/tables, since the
+mappings so specified would allow one to add and/or delete rows and/or
+columns dynamically, without ever remapping array/table positions that
+are unaffected by the reshaping.  (Extending this work to higher
+dimensionalities is immediate.)  This section surveys some of the
+results I obtained.
+
+\subsection{A Methodology for Constructing PFs}
+
+Rather than trying to select a single one-form-fits-all storage
+mapping for dynamically extendible arrays, I decided, in
+\cite{Rosenberg74}, to explore the space of possible PFs, with an eye
+to seeking ones that optimized various criteria.  I used the following
+procedure to systematize the process of constructing PFs.
+
+\paragraph{\underline{Procedure}} {\sf PF-Constructor}($\a$) \\
+/*Construct a PF $\a$*/
+\begin{description}
+\item[Step 1.]
+Partition the set $\N \times \N$ of potential array/table positions
+into finite sets called {\it shells}.  Order the shells linearly in
+some way: many natural shell-partitions carry a natural order.
+\end{description}
+
+\noindent {\bf Aside.}
+Here are a few sample shell-partitions that played a role in our study
+of extendible arrays.  For each relevant integer $c$, shell $c$
+comprises all pairs $\langle x,y \rangle$ such that:
+
+\fbox{
+\begin{tabular}{l|l}
+$x+y =c$ & the diagonal shells that define the PF $\d$ of
+(\ref{e.diag}) and Fig.~\ref{f.diag} \\
+\hline
+$\max(x,y) = c$ & square shells; cf.~(\ref{e.square}) and
+Fig.~\ref{f.square} \\
+\hline
+$xy = c$ & hyperbolic shells; cf.~(\ref{e.hyper}) and
+Fig.~\ref{f.hyper}.
+\end{tabular}
+}
+
+\begin{description}
+\item[Step 2.]
+Construct a PF from the shells as follows.
+  \begin{description}
+  \item[Step 2a.]
+Enumerate the array positions shell by shell, honoring the ordering of
+the shells.
+  \item[Step 2b.]
+Enumerate each shell in some systematic way, say ``by columns.''  This
+means enumerating the pairs $\langle x,y \rangle$ in the shell in
+increasing order of $y$ and, for pairs having equal $y$ values, in,
+say, decreasing order of $x$.  (Increasing order of $x$ works as
+well, of course.)
+  \end{description}
+\end{description}
+
+\begin{theorem}
+Any function $\a: \N \times \N \leftrightarrow \N$ that is designed
+via Procedure {\sf PF-Constructor} is a valid APF.
+\end{theorem}
+
+\proof{We sketch the easy proof.  Step 1 of Procedure {\sf
+PF-Constructor} constructs a partial order on $\N \times \N$, in
+which: ($a$) each set of incomparable elements---called a shell---is
+finite; ($b$) there is a linear order on the shells.  Step 2 extends
+the partial order of Step 1 to a linear order, by honoring the linear
+order on the shells and imposing a linear order within each shell.
+The function $\a$ constructed by the Procedure can thus be viewed as
+an enumeration of $\N \times \N$---which means that $\a$ is a PF.}
+
+Of course, Procedure {\sf PF-Constructor} begs the question of how to
+compute the PF $\a$ efficiently.  This issue will be a major concern
+for the remainder of this section.
+
+\subsection{Pursuing Compact PFs}
+
+When one considers using a PF for mapping arrays/tables into storage,
+one notes immediately the poor resulting management of storage.  For
+instance, the diagonal PF $\d$ spreads the $n^2$-position $n \times n$
+array/table over $2n^2$ addresses: $\d(1,1) = 1$ and $\d(n,n) = 2n^2$;
+even worse (percentage-wise), $\d$ spreads the $n$-position $1 \times
+n$ array/table over $> {1 \over 2} n^2$ addresses: $\d(1,1) = 1$ and
+$\d(1,n) = {1 \over 2} (n^2 + n)$.  This loss of ``compactness'' is a
+more serious deficiency than is the loss of the bidirectional
+arithmetic progressions enjoyed by the standard row- or column-major
+indexings used by most compilers, since the waste of storage plagues
+one no matter how one intends to access the array/table.  Therefore,
+in \cite{Rosenberg74,Rosenberg75}, I actively sought PFs $\a$ that
+were {\it compact}, as measured by small growth rates of their {\it
+spread functions}
+\begin{equation}
+\label{e.compact}
+{\bf S}_{\cal A}(n) \ \eqdef \ \max\{ \a(x, y) \ | \ xy \leq n \}.
+\end{equation}
+In other words, ${\bf S}_{\cal A}(n)$ is the largest address that the
+PF $\a$ assigns to any position of an array/table that has $n$ or
+fewer positions.
+
+Here is what I discovered.
+
+\subsubsection{PFs that favor one fixed aspect ratio}
+
+Say that one moderates one's demands on the PF $\a$ by focusing only
+on its compactness when storing arrays/tables of a fixed aspect ratio
+$\langle a, b \rangle$, i.e., arrays/tables whose dimensions have the
+form $ak \times bk$ for some $k$.  Then one can manage storage
+perfectly, in the sense that there exists a PF $\a_{a,b}$ such that
+\begin{equation}
+\label{e.aspect}
+{\bf S}_{{\cal A}_{a,b}}(n) \ \eqdef \
+\max\{ \a_{a,b}(x, y) \ | \ [x \leq ak] \ \wedge \ [y \leq bk] \wedge
+	\ [abk^2 \leq n] \}
+	\ = \ n.
+\end{equation}
+In other words, $\a_{a,b}$ maps every position $(x,y)$ of an $ak
+\times bk$ array/table having $n$ or fewer positions to an address
+$\leq n$.  It is easy to construct $\a_{a,b}$ via the shells specified
+as follows.
+\begin{enumerate}
+\item
+Shell $1$ comprises the positions of the $a \times b$ array, i.e., the
+set 
+\[ \{ \langle x,y \rangle \ | \ [x \leq a] \ \wedge \ [y \leq b] \}. \]
+\item
+Shell $k+1$ comprises the positions of the $a(k+1) \times b(k+1)$
+array that are not elements of the $ak \times bk$ array, i.e., the
+set
+\[ \{ \langle x,y \rangle \ | \ [ak < x \leq a(k+1)] \ \vee \ [bk < y
+\leq b(k+1)] \}. \]
+\end{enumerate}
+
+While the preceding guarantee of compactness ignores the issue of ease
+of computation, there are at least some PFs that utilize storage
+perfectly in the sense of (\ref{e.aspect}) and are quite easy to
+compute.  One useful such PF favors {\em square} arrays/tables, i.e.,
+those whose aspect ratio is given by $a = b = 1$.  This
+``square-shell'' PF, $\a_{1,1}$ is specified by the following explicit
+expression.
+\begin{equation}
+\label{e.square}
+\begin{array}{cccl}
+  & \a_{1,1}(x, y) & =      & m^2 + m + y-x+1 \\
+\mbox{where} & m  & \eqdef & \max(x-1,y-1).
+\end{array}
+\end{equation}
+Once having noted that $\a_{1,1}$ maps integers in a counterclockwise
+direction along the ``square shells'' $m = 0, \ m = 1, ...$ (see
+Fig.~\ref{f.square}), one verifies its bijectiveness via a simple
+double induction.  (Of course, $\a_{1,1}$ has a twin that proceeds in
+a clockwise direction along the square shells.)
+
+\begin{figure}[htb]
+\begin{center}
+\begin{tabular}{r|r|r|r|r|r|r|r|r}
+  1 &  4 &  9 & 16 & \fbox{25} &  36 &  49 &  64 & $\cdots$ \\
+  2 &  3 &  8 & 15 & \fbox{24} &  35 &  48 &  63 & $\cdots$ \\
+  5 &  6 &  7 & 14 & \fbox{23} &  34 &  47 &  62 & $\cdots$ \\
+ 10 & 11 & 12 & 13 & \fbox{22} &  33 &  46 &  61 & $\cdots$ \\
+\fbox{17} & \fbox{18} & \fbox{19} & \fbox{20} & \fbox{21} &  32 &  45
+  &  60 & $\cdots$ \\ 
+ 26 & 27 & 28 & 29 & 30 &  31 &  44 &  59 & $\cdots$ \\
+ 37 & 38 & 39 & 40 & 41 &  42 &  43 &  58 & $\cdots$ \\
+ 50 & 51 & 52 & 53 & 54 &  55 &  56 &  57 & $\cdots$ \\
+$\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ &
+  $\vdots$ & $\vdots$ & $\ddots$
+\end{tabular}
+\end{center}
+\caption{{\it The square-shell PF $\a_{1,1}$.  The shell $\max(x,y)
+=5$ is highlighted.}
+\label{f.square}}
+\end{figure}
+
+\subsubsection{PFs that favor finite sets of aspect ratios}
+
+We showed in \cite{Rosenberg75} how to ``dovetail'' any set $\{ \a_1,
+\a_2, \ldots, \a_m \}$ of $m$ PFs to arrive at a PF $\a$ whose
+compactness is at worst $m$ times that of the most compact of the PFs
+$\a_i$; i.e., for all $n$,
+\[  {\bf S}_{\cal A}(n) \ \leq \ m \cdot \min_i {\bf S}_{{\cal
+	A}_i}(n). \]
+The dovetailing is performed in two steps.
+\begin{enumerate}
+\item
+Alter each $\a_k$ to be a bijection $\a^{(m)}_k$ between $\N \times
+\N$ and the congruence class $(k-1) \bmod m$, i.e., the set of
+integers of the form $mx + k-1$.  Specifically, define the PF
+$\a^{(m)}_k$ via: $\a^{(m)}_k(x,y) \ = \ m \cdot \a_k(x,y) + k-1$.
+\item
+Define the PF $\a$ via:
+$\a(x,y) \ = \ \min_k\{ \a^{(m)}_k(x,y) \}$.
+\end{enumerate}
+Thus, if one wants a PF to be compact on arrays of any fixed finite
+set of, say $m$, aspect ratios $\langle a_1, \ b_1 \rangle$, $\langle
+a_2, \ b_2 \rangle$, \ldots, $\langle a_m, \ b_m \rangle$, then one
+can craft a PF $\a_{a_1,b_1; a_2,b_2; \ldots; a_m,b_m}$ that maps
+every position $(x,y)$ of an array/table which has one of these $m$
+aspect ratios, and which has $n$ or fewer positions, to an address
+$\leq mn$.
+
+\subsubsection{A PF that minimizes worst-case spread}
+
+The preceding shape-based guarantees do not help much with
+applications such as relational databases, wherein one cannot limit
+{\em a priori} the potential shapes of one's tables.  This fact led me
+to the question of how compact a PF could be on arrays/tables of
+arbitrary shapes.  I showed in \cite{Rosenberg75} that there exists a
+PF $\h$ whose compactness is given by
+\[ {\bf S}_{\cal H}(n) \ = \ O(n \log n), \]
+and no PF can beat this compactness (in the worst case) by more than a
+constant factor.  The PF $\h$ maps integers along the ``hyperbolic
+shells'' defined by $xy = 1, \ xy =2, \ xy=3, \ldots$.  More
+specifically, if we let $\delta(n)$ denote the number of divisors of
+the integer $n$, then---see Fig.~\ref{f.hyper}---
+\begin{equation}
+\label{e.hyper}
+\begin{array}{lcll}
+\h(x,y) & = & \sum_{k=1}^{xy-1} \delta(k) \ \ + &
+  \mbox{the position of } \ \langle x, y \rangle \ \mbox{ among} \\
+        &   &  & \mbox{2-part factorizations of $xy$,} \\
+        &   &  & \mbox{in reverse lexicographic order}
+\end{array}
+\end{equation}
+\begin{figure}[htb]
+\begin{center}
+\begin{tabular}{r|r|r|r|r|r|r|r}
+ 1 &  3 &  5 &   8 &  10 & \fbox{14} &  16  & $\cdots$ \\
+ 2 &  7 & \fbox{13} &  19 &  26 &  34 &  40 & $\cdots$ \\
+ 4 & \fbox{12} & 22 &  33 &  44 &  56 &  69 & $\cdots$ \\
+ 6 & 18 & 32 &  48 &  64 &  81 &  99  & $\cdots$ \\
+ 9 & 25 & 43 &  63 &  86 & 108 & 130  & $\cdots$ \\
+\fbox{11} & 31 & 55 &  80 & 107 & 136 & 165 & $\cdots$ \\
+15 & 39 & 68 &  98 & 129 & 164 & 200  & $\cdots$ \\
+17 & 47 & 79 & 116 & 154 & 193 & 235  & $\cdots$ \\
+$\vdots$ & $\vdots$ & $\vdots$  & $\vdots$ & $\vdots$ &
+  $\vdots$ & $\vdots$ & $\ddots$
+\end{tabular}
+\end{center}
+\caption{{\it The hyperbolic PF $\h$.  The shell $xy = 6$ is
+highlighted.}
+\label{f.hyper}}
+\end{figure}
+
+The optimality of the PF $\h$ in compactness (up to constant factors)
+is easily seen via the following argument.  The set of arrays that
+have $n$ or fewer positions are those of aspect ratios $a_i \times
+b_i$, where $a_i b_i \leq n$.  As one sees from Fig.~\ref{f.hyp}
+(generalized to arbitrary $n$), the union of the positions of all
+these arrays is the set of integer lattice points under the hyperbola
+$xy = n$.  Easily, this set of points has cardinality $\Theta(n \log
+n)$.  Since every array contains position $\langle 1,1 \rangle$, it
+follows that, for every $n$, some array containing $n$ or fewer
+positions is spread over $\Omega(n \log n)$ addresses.
+\begin{figure}[htb]
+\centerline{\psfig{figure=pairing.hyp.eps,height=7truecm}}
+\caption{{\it The aggregate set of positions of arrays having $16$ or
+fewer position.}
+\label{f.hyp}}
+\end{figure}
+
+\noindent {\bf Aside.}
+The work described in this section aimed at giving one a broad range
+of ways of accessing one's arrays/tables: by position, by row/column,
+by block (at varying computational costs).  If one is interested in
+accessing an extendible array/table only by position, then one might
+be well served by the hashing schemes studied in \cite{RosenbergS77}.
+In that source, we crafted hashing schemes with the following resource
+consumption.  When one's array/table has at most $n$ positions, then,
+no matter what the array/table's aspect ratio, the hashing scheme will
+employ fewer than $2n$ memory locations and will allow one to access
+any position of the array/table in expected time $O(1)$ and worst-case
+time $O(\log \log n)$.
+
+\section{Pairing Functions and Web-Computing}
+\label{s.webcomp}
+
+\setcounter{equation}{0}
+
+Evolving technology has given rise to a new modality of cooperative
+computing, which we call {\it Web-Based Computing} ({\it WBC}, for
+short).  WBC proceeds roughly as follows.  ``Volunteers'' register
+with a WBC website.  After having registered, each volunteer visits
+the website from time to time to receive a task to compute.  Some time
+after completing a task, the volunteer returns the results from that
+task and receives a new task.  And the cycle continues.
+
+As typically implemented, WBC is vulnerable to malicious, or careless,
+volunteers returning false results.  When the WBC computations relate
+to sensitive matters such as security \cite{RSAbyWeb95} or clinical
+drug testing \cite{Intel01,Olson01}, such false results could have
+dire consequences.  In \cite{Rosenberg02}, I have proposed a
+computationally lightweight scheme for keeping track of which
+volunteer computed which task(s), thereby enabling the head of the WBC
+project to ban frequently errant volunteers from continued
+participation in the project.  Note that my work addresses concerns
+about {\em accountability, not security}.
+
+The scheme I proposed builds on the strategy of assigning
+positive-integer indices to ($a$) the set of all tasks, ($b$) all
+volunteers, ($c$) the set of tasks reserved for each volunteer $v$,
+and using a PF $\t$ (which I call a {\em task-allocation function} in
+this context) to link volunteers with their assigned tasks.  In other
+words, the $t$th task that volunteer $v$ receives to compute is task
+$\t(v,t)$.  Since the potential practicality of such a scheme demands
+that the functions $\t$, $\t^{-1}$, and $\s(v, t) \eqdef \t(v, t+1) -
+\t(v, t)$ all be easily computed, the primary focus in
+\cite{Rosenberg02} is on PFs that are {\it additive} ({\it APFs}, for
+short): an APF assigns each volunteer $v$ a {\it base task-index}
+$B_v$ and a {\it stride} $S_v$; it then uses the formula
+\[ \t(v, t) \ = \ B_v + (t-1) S_v \]
+to determine the workload task-index of the $t$th task assigned to
+volunteer $v$.  From a system perspective, APFs have the benefit that
+a volunteer's stride need be computed only when s/he registers at the
+website and can be stored for subsequent appearances.
+
+A task-allocation scheme based entirely on APFs allows new volunteers
+to arrive dynamically but not to depart.  If a volunteer departs,
+his/her tasks will never be computed---unless a new volunteer arrives
+to take their places and compute their tasks.  Such reassignment would
+demand added mechanisms to retain accountability.  The complete scheme
+described in \cite{Rosenberg02} has a ``front end'' which allows
+volunteers to arrive {\em and depart} dynamically; it also ensures
+that faster volunteers are always assigned smaller indices.  The
+interested reader is referred to that paper for details beyond this
+section's focus on APFs.
+
+Given the proposed use of APFs to assign indices to volunteers, one
+can argue that the management of the memory where tasks reside is
+simplified if one devises APFs whose strides $S_v$ grow slowly as a
+function of $v$.  Such APFs are ``compact,'' in the sense of
+(\ref{e.compact}).  This observation sets the agenda for
+\cite{Rosenberg02} and for the remainder of this section.
+Section~\ref{s.unbounded} presents a methodology for designing easily
+computed APFs; Section~\ref{s.efficient} presents a sequence of APFs
+that suggest a tradeoff between the ease of computing an APF and the
+rate of growth of the APF's strides.
+
+We henceforth abstract the preceding discussion from the WBC scenario
+by replacing ``volunteer'' by ``row'' and ``base task-index'' by
+``base row-entry.''  We also revert to our generic uses of $x$ and
+$y$, instead of $v$ and $t$.
+
+\subsection{A Methodology for Designing {\em Additive} PFs}
+\label{s.unbounded}
+
+\renewcommand{\O}{{\sf O}}
+
+Easily, any APF must have infinitely many distinct strides; i.e.,
+$S_x$, viewed as a function of $x$, must have infinite range.  Despite
+this, that there do exist easily computed APFs.  One strategy for
+designing such APFs builds on the following well-known property of the
+set \O\/ of positive odd integers.
+
+\begin{lemma}[\cite{NivenZ80}]
+\label{l.odds}
+For any positive integer $c$, every odd integer can be written
+in precisely one of the $2^{c-1}$ forms:
+\[ 2^c n +1, \ 2^c n +3, \ 2^c n +5, \ldots, \ 2^c n + (2^c -1), \]
+for some nonnegative integer $n$.
+\end{lemma}
+
+\noindent
+One builds on Lemma~\ref{l.odds} to construct APFs as follows.
+
+\paragraph{\underline{Procedure}} {\sf APF-Constructor}($\t$) \\
+/*Construct an APF $\t$*/
+\begin{description}
+\item[Step 1.]
+Partition the set of row-indices into {\it groups} whose sizes are
+powers of 2 (with any desired mix of equal-size and distinct-size
+groups).  Order the groups linearly in some (arbitrary) way.
+\end{description}
+/*One can now talk unambiguously about group 0 (whose members share
+{\it group-index} $g=0$), group 1 (whose members share group-index
+$g=1$), and so on.*/
+\begin{description}
+\item[Step 2.]
+Assign each group a distinct copy of the set \O, as well as a {\it
+copy-index} $\kappa(g)$ expressed as a function of the group-index
+$g$.
+
+\item[Step 3.]
+Allocate group $g$'s copy of \O\/ to its members via the $(c =
+\kappa(g))$ instance of Lemma~\ref{l.odds}, using the multiplier $2^g$
+as a {\it signature} to distinguish group $g$'s copy of the set \O\/
+from all other groups' copies.
+\end{description}
+
+Procedure {\sf APF-Constructor} can be viewed as specializing the
+general scheme for constructing APFs in \cite{Stockmeyer73}.  The
+specialization allows us to specify the APF in a computationally
+friendly way.
+
+\paragraph{An explicit expression for $\t$.}
+If we denote the $2^{\kappa(g)}$ rows of group $g$ as $x_{g,1}$,
+$x_{g,2}$, \ldots, $x_{g,2^{\kappa(g)}}$, then for all $i \in \{ 1, 2,
+\ldots, 2^{\kappa(g)} \}$,
+\begin{equation}
+\label{e.define.t}
+\t(x_{g,i}, y) \ \eqdef \
+2^g \left[ 2^{1 + \kappa(g)}(y-1) +
+	(2x_{g,i} +1 \bmod 2^{1 + \kappa(g)}) \right]
+\end{equation}
+
+\begin{theorem}
+\label{t.define.ataf}
+Any function $\t: \N \times \N \leftrightarrow \N$ that is designed
+via Procedure {\sf APF-Constructor}, hence is of the form
+(\ref{e.define.t}), is a valid APF whose base row-entries and strides
+satisfy
+\begin{equation}
+\label{e.genl.b.s}
+B_x \ \leq \
+S_x \ =    \ \t(x, y+1) - \t(x,y) \ = \ 2^{1 + g + \kappa(g)}.
+\end{equation}
+\end{theorem}
+
+\proof{We sketch the proof.
+{\bf (1)} Any such $\t$ maps $\N \times \N$ {\em onto} $\N$, because
+every positive integer equals {\em some} power of 2 times {\em some}
+odd integer.  $\t$ is {\em one-to-one} because it has a functional
+inverse $\t^{-1}$.  To wit, the trailing 0's of each image integer $k
+= \t(x,y)$ identify $x$'s group $g$, hence the operative instance
+$\kappa(g)$ of Lemma~\ref{l.odds}.  Then:
+\begin{enumerate}
+\item
+We compute
+\[ x \ = \ {1 \over 2} \left[ (2^{-g} k \bmod 2^{1 + \kappa(g)}) - 1
+	\right], \]
+which is an integer because the division by $2^g$ produces an odd
+number.
+\item
+This leaves us with a linear expression of the form $ay+b$, from which
+we easily compute $y$.
+\end{enumerate}
+Finally, we read the relations (\ref{e.genl.b.s}) directly from
+(\ref{e.define.t}).
+}
+
+In order to implement Procedure {\sf APF-Constructor} completely, one
+must express both the group-indices $g$ and their associated
+copy-indices $\kappa(g)$ as functions of $x$.  This is accomplished by
+noting that all $x$ whose indices lie in the range
+\begin{equation}
+\label{e.g.vs.v}
+2^{\kappa(0)} + 2^{\kappa(1)} + \cdots + 2^{\kappa(g-1)}
++ 1 \ \leq \ x \ \leq \
+2^{\kappa(0)} + 2^{\kappa(1)} + \cdots + 2^{\kappa(g-1)} +
+2^{\kappa(g)}
+\end{equation}
+share group-index $g$ and copy-index $\kappa(g)$.  Translating the
+range (\ref{e.g.vs.v}) into an efficiently computed expression of the
+form $g = f(x)$ may be a simple or a challenging enterprise, depending
+on the functional form of $\kappa(g)$ that results from the grouping
+of row-indices.
+
+\subsection{A Sampler of Explicit APFs}
+\label{s.efficient}
+
+Theorem~\ref{t.define.ataf} assures us that Procedure {\sf
+APF-Constructor} produces a valid APF no matter how the copy-index
+$\kappa(g)$ grows as a function of the group-index $g$.  However, the
+ease of computing the resulting APF, and its compactness, depend
+crucially on this growth rate.  We now illustrate how one can use this
+growth rate as part of the design process, in order to stress either
+the ease of computing an APF or its compactness.
+
+\subsubsection{APFs that stress computation ease}
+
+We first implement Procedure {\sf APF-Constructor} with {\em
+equal-size groups}, i.e., with $\kappa(g) = constant$.  For each $c
+\in \N$, let $\t^{<c>}$ be the APF produced by the Procedure with
+$\kappa^{<c>}(g) \equiv c-1$.  One computes easily that
+\[ \t^{<c>}(x, y) \ \eqdef \
+   2^{\lfloor (x-1)/2^{c-1} \rfloor} \left[ 2^c (y-1) + (2x-1 \bmod
+        2^c) \right].  \]
+
+\begin{prop}
+\label{p.k.c}
+Each $\t^{<c>}$ is a valid APF whose base row-entries and strides
+are given by
+\begin{equation}
+\label{e.stride.c}
+B^{<c>}_x \ \leq \
+S^{<c>}_x \ = \ 2^{\lfloor (x-1)/2^{c-1} \rfloor + c}.
+\end{equation}
+\end{prop}
+
+Each $\t^{<c>}$ is easy to compute but has base row-entries and
+strides that grow {\em exponentially} with row-indices.  Increased
+values of $c$ (= larger fixed group sizes) decrease the base of the
+growth exponential, at the expense of modest increase in computational
+complexity.  Computing a few sample values illustrates how a larger
+value of $c$ penalizes a few low-index rows but gives all others
+significantly smaller base row-entries and strides; cf.~the top half
+of Fig.~\ref{t.samples}.
+
+\begin{figure}[htb]
+\begin{center}
+\begin{tabular}{c|c||r|r|r|r|r|r}
+$x$ & $g$ & \multicolumn{6}{c}{$\t^{<1>}(x,y)$} \\
+\hline
+14 & 13 & 8192 & 24576 & 40960 &  57344 &  73728 &
+	$\cdots$ \\
+15 & 14 & 16384 & 49152 & 81920 & 114688 & 147456 &
+	$\cdots$ \\
+\hline
+\hline
+$x$ & $g$ & \multicolumn{6}{c}{$\t^{<3>}(x,y)$} \\
+\hline
+14 & 3 & 24 &   88 &  152 &  216 &  280 & $\cdots$ \\
+15 & 3 & 40 &  104 &  168 &  232 &  296 & $\cdots$ \\
+ & & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ &  $\vdots$ \\
+28 & 6 & 448 &  960 & 1472 & 1984 & 2496 & $\cdots$ \\
+29 & 7 & 128 & 1152 & 2176 & 3200 & 4224 & $\cdots$ \\
+\hline
+\hline
+$x$ & $g$ & \multicolumn{6}{c}{$\t^\#(x,y)$} \\
+\hline
+28 & 4 & 400 &  912 & 1424 & 1936 & 2448 & $\cdots$ \\
+29 & 4 & 432 &  944 & 1456 & 1968 & 2480 & $\cdots$ \\
+\hline
+\hline
+$x$ & $g$ & \multicolumn{6}{c}{$\t^\star(x,y)$} \\
+\hline
+28 & 3 & 328 & 840 & 1352 & 1864 & 2376 & $\cdots$ \\
+29 & 3 & 344 & 856 & 1368 & 1880 & 2392 & $\cdots$ \\
+   &  & $\vdots$ & $\vdots$ & $\vdots$ &
+	$\vdots$ & $\vdots$ & $\ddots$ 
+\end{tabular}
+\end{center}
+\caption{{\it Sample values by several APFs.}
+\label{t.samples}}
+\end{figure}
+
+\subsubsection{APFs that balance computation ease and compactness}
+
+The functional form of the exponent of $2$ in (\ref{e.stride.c})
+suggests that one can craft an APF whose base row-entries and strides
+grow subexponentially by allowing the parameter $c$ to grow with $x$,
+in a way that (roughly) balances $x/2^c$ against $c$.  This strategy
+leads us to consider the copy-index $\kappa^\#(g) = g$.  When we
+implement Procedure {\sf APF-Constructor} with copy-index $\kappa^\#$,
+we arrive at an APF $\t^\#$ that is rather easy to compute and whose
+base row-entries and strides grow only {\em quadratically} with
+row-indices.  To wit \ldots
+
+The copy-index $\kappa^\#(g) = g$ aggregates row-indices into groups
+of exponentially growing sizes: each group $g$ comprises row-indices
+$2^g, 2^g +1, \ldots, 2^{g+1} -1$.  By (\ref{e.g.vs.v}), then, one
+computes easily that\footnote{Throughout, all logarithms have base 2.}
+\begin{equation}
+\label{e.g.vs.v.quad}
+\kappa^\#(g) \ = \ g \ = \ \lfloor \log x \rfloor .
+\end{equation}
+Instantiating (\ref{e.g.vs.v.quad}) in the definitional scheme
+(\ref{e.define.t}), we find that
+\begin{equation}
+\label{e.t.quad}
+\t^\#(x, y) \ = \
+2^{\lfloor \log x \rfloor} \left( 2^{1 +
+	\lfloor \log x \rfloor} (y-1) + (2x+1 \bmod 2^{1 + \lfloor
+	\log x \rfloor}) \right)
+\end{equation}
+
+\begin{prop}
+\label{p.k.quad}
+The function $\t^\#$ specified in (\ref{e.t.quad}) is a valid APF
+whose base row-entries and strides (as functions of $x$) are given by
+\[ B^\#_x \ < \
+\s^\#_x \ = \ 2^{1 + 2 \lfloor \log x \rfloor} \ \leq \ 2x^2 ,  \]
+hence, grow quadratically with $x$.
+\end{prop}
+
+\paragraph{Comparing $\t^\#$ and the $\t^{<c>}$.}
+For sufficiently large $x$, the (exponentially growing) strides of any
+of the APFs $\t^{<c>}$ will be dramatically larger than the
+(quadratically growing) strides of the APF $\t^\#$.  However, it takes
+a while for $\t^\#$'s superiority to manifest itself; for instance,
+\begin{itemize}
+\item
+it is not until $x = 5$ that $\t^{<1>}$'s strides are always at least
+as large as $\t^\#$'s;
+\item
+the corresponding number for $\t^{<2>}$ is $x = 11$;
+\item
+the corresponding number for $\t^{<3>}$ is $x = 25$.
+\end{itemize}
+
+\subsubsection{APFs that stress compactness}
+
+By choosing a copy-index $\kappa(g)$ that grows superlinearly with
+$g$, one can craft APFs whose base row-entries and strides grow
+subquadratically, thereby beating the compactness of $\t^\#$.  But one
+must choose $\kappa(g)$'s growth rate judiciously, since faster growth
+need not enhance compactness.
+
+\paragraph{Achieving subquadratic growth.}
+Many copy-index growth rates yield APFs with subquadratic compactness.
+However, all of the APFs we know of that achieve this goal are rather
+difficult to compute and actually achieve the goal only
+asymptotically, hence are more likely of academic than of practical
+interest.
+
+Consider, for each $k \in \N$, the APF $\t^{[k]}$ specified by the
+copy-index $\kappa^{[k]}(g) = g^k$.  By (\ref{e.g.vs.v}), the
+row-indices $x$ belonging to group $g$ now lie in the range
+\[ 1 + 2 + 2^{2^k} + \cdots + 2^{(g-1)^k} \ < \ x \ \leq \
+        1 + 2 + 2^{2^k} + \cdots + 2^{g^k}, \]
+so that $g = (1 + o(1)) \lceil (\log x)^{1/k} \rceil$.  We actually
+use the simplified, albeit slightly inaccurate, expression $g = \lceil
+(\log x)^{1/k} \rceil$ in our asymptotic analyses of the $\t^{[k]}$,
+since the $o(1)$-quantity decreases very rapidly with growing $x$.
+Although closed-form expressions for $\t^{[k]}$ in terms of $x$ have
+eluded us, we can verify that each $\t^{[k]}$ does indeed enjoy
+subquadratic stride growth.
+
+\begin{prop}
+\label{p.k.subquad}
+Each function $\t^{[k]}$ produced by Procedure {\sf APF-Constructor}
+from the copy-index $\kappa^{[k]}(g) = g^k$ is a valid APF whose base
+row-entries and strides (as functions of $x$) are given by
+\begin{equation}
+\label{e.stride.subquad}
+B^{[k]}_x \ \leq \ \s^{[k]}_x \ = \
+     2^{O \left( (\log x)^{1/k} + \log x \right)}
+     \ = \ x 2^{O \left( (\log x)^{1/k} \right)}
+\end{equation}
+hence, grow {\em subquadratically} with $x$.
+\end{prop}
+
+We illustrate a close relative of $\t^{[2]}$ which exhibits its
+subquadratic compactness at much smaller values of $x$ than $\t^{[2]}$
+does, namely, the APF $\t^\star$ that Procedure {\sf APF-Constructor}
+produces from the copy-index
+\begin{equation}
+\label{e.c.vs.g.star}
+\kappa^\star(g) =  \left\lceil {1 \over 2} g^2 \right\rceil.
+\end{equation}
+Mimicking the development with $\kappa^{[k]}$, we see that now $g = (1
++ o(1)) \lceil \sqrt{2 \log x} \rceil +1$, which we simplify for
+analysis to the slightly inaccurate expression
+\[ g \ = \ \left\lceil \sqrt{2 \log x} \right\rceil +1.  \]
+We can easily compute $\t^\star$ from (\ref{e.c.vs.g.star}), in the
+presence of (\ref{e.define.t}, \ref{e.g.vs.v}).
+
+\begin{prop}
+The base row-entries and strides of the APF $\t^\star$ satisfy
+\[ B^\star_x \ \leq \ \s^\star_x \ = \ 2^{1 + g +
+    \kappa^\star(g)} \ \approx \ 8x 4^{\sqrt{2 \log x}}.  \]
+\end{prop}
+
+\paragraph{Comparing $\t^\star$ and $\t^\#$.}
+Any function that grows quadratically with $x$ will eventually produce
+significantly larger values than a function that grows only as $x
+4^{\sqrt{2\log x}}$.  Therefore, $\t^\star$'s strides will eventually
+be dramatically smaller than $\t^\#$'s.  Fig.~\ref{t.samples}
+indicates that this difference takes effect at about the same point as
+the exponential vs.~quadratic one noted earlier, albeit at the cost of
+greater computational complexity.
+
+\paragraph{The danger of excessively fast growing $\kappa$.}
+If $\kappa(g)$ grows too fast with $g$, then the base row-entries and
+strides of the resulting APF grow {\em super}quadratically with the
+row-indices $x$, thereby confuting our goal of beating quadratic
+growth.  We exemplify this fact by supplying Procedure {\sf
+APF-Constructor} with the copy-index $\kappa(g) = 2^g$; the reader can
+readily supply other examples.  By (\ref{e.g.vs.v}), we see that in
+this case, $g = \lfloor \log \log x \rfloor + O(1)$.  Therefore,
+whenever $x$ is the smallest row-index with a given group-index $g$
+(of course, infinitely many such $x$ exist) we have
+\[ x \ = \ 2^{\kappa(0)} + 2^{\kappa(1)} + \cdots + 2^{\kappa(g-1)} +
+	1 \ \approx \ \sqrt{2^{\kappa(g)}}, \]
+while the stride associated with $x$ is (cf.~(\ref{e.genl.b.s}))
+\[ S_x \ = \ 2^{1 + g + \kappa(g)} \ > \ 2^{\kappa(g)} \kappa(g) \
+	\approx \ x^2 \log x.  \]
+We do not yet know the growth rate at which faster growing $\kappa(g)$
+starts hurting compactness.  Finding this rate is an atractive
+research problem.
+
+\medskip
+
+\nonumsection{Acknowledgements}
+ 
+The research described in Sections~\ref{s.diag} and \ref{s.arrays} was
+done while the author was with the IBM Watson Research Center.  The
+research described in Section~\ref{s.webcomp}, and the preparation of
+this paper were supported in part by NSF Grant CCR-00-73401.
+
+\nonumsection{References}
+
+\begin{thebibliography}{99}
+
+\bibitem{Cantor78}
+G.~Cantor (1878): Ein Beitrag zur Begrundung der transfiniter
+Mengenlehre.  {\it J.~Reine Angew.~Math.~84}, 242--258.
+
+\bibitem{Cauchy21}
+A.L.~Cauchy (1821):
+{\it Cours d'analyse de l\'{E}cole Royale Polytechnique, 1\`{e}re
+partie: Analyse alg\'{e}brique}.
+l'Imprimerie Royale, Paris.  Reprinted: Wissenschaftliche
+Buchgesellschaft, Darmstadt, 1968.
+
+\bibitem{Davis58}
+M.~Davis (1958):
+{\it Computability and Unsolvability}.
+McGraw-Hill, N.Y.
+
+\bibitem{FueterP23}
+R.~Fueter and G.~P\'{o}lya (1923):
+Rationale Abz\"{a}hlung der Gitterpunkte.  {\it
+Vierteljschr.~Naturforsch.~Ges.~Z\"{u}rich 58}, 380--386.
+
+\bibitem{Godel31}
+K.~G\"{o}del (1931): \"{U}ber formal unentscheidbare S\"{a}tze der
+Principia Mathematica und verwandter Systeme, I.  {\it Monatshefte
+f\"{u}r Mathematik und Physik 38}, 173--198.
+
+\bibitem{Intel01}
+{\it The Intel Philanthropic Peer-to-Peer program.}  $\langle${\tt
+www.intel.com/cure}$\rangle$.
+
+\bibitem{LewR78a}
+J.S.~Lew and A.L.~Rosenberg (1978): Polynomial indexing of integer
+lattices, I.  {\it J.~Number Th.~10}, 192--214.
+ 
+\bibitem{LewR78b}
+J.S.~Lew and A.L.~Rosenberg (1978): Polynomial indexing of integer
+lattices, II.  {\it J.~Number Th.~10}, 215--243.
+
+\bibitem{NivenZ80}
+I.~Niven and H.S.~Zuckerman (1980):
+{\it An Introduction to the Theory of Numbers.} (4th Ed.)
+J.~Wiley \& Sons, New York.
+
+\bibitem{Olson01}
+{\it The Olson Laboratory Fight AIDS@Home project.}  $\langle${\tt
+www.fightaidsathome.org}$\rangle$.
+ 
+\bibitem{Rosenberg74}
+A.L.~Rosenberg (1974): Allocating storage for extendible arrays.  {\it
+J.~ACM 21}, 652--670.
+
+\bibitem{Rosenberg75}
+A.L.~Rosenberg (1975): Managing storage for extendible arrays.  {\it
+SIAM J.~Comput.~4}, 287--306.
+
+\bibitem{Rosenberg02}
+A.L.~Rosenberg (2003): Accountable Web-computing.  {\it IEEE
+Trans.~Parallel and Distr.~Systs.~14}, to appear.
+
+\bibitem{RosenbergS77}
+A.L.~Rosenberg and L.J.~Stockmeyer (1977): Hashing schemes for
+extendible arrays.  {\it J.~ACM 24}, 199--221.
+
+\bibitem{RSAbyWeb95}
+{\it The RSA Factoring by Web Project.}
+$\langle${\tt http://www.npac.syr.edu/factoring}$\rangle$ (with
+Foreword by A.~Lenstra).  Northeast Parallel Architecture Center.
+
+\bibitem{Stockmeyer73}
+L.J.~Stockmeyer (1973): Extendible array realizations with additive
+traversal.  IBM Research Report RC-4578.
+
+\bibitem{Turing36}
+A.M.~Turing (1936): On computable numbers, with an application to the
+Entscheidungsproblem.  {\it Proc.~London Math.~Soc.}~(ser.~2, vol.~42)
+230--265; Correction {\it ibid.}~(vol.~43) 544--546.
+\end{thebibliography}
+
+\end{document}

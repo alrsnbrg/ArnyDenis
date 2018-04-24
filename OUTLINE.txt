@@ -37,6 +37,9 @@
    {3.6.1}Measures of distance in tuple-spaces}{15}
    {3.6.2}Edit-distance: a measure of closeness in {\em string spaces}}{15}
 
+{3bis} Basis in Linear Algebra
+Is it useful?
+
 {4}GRAPH-THEORETIC ENTITIES}{17}
  {4.1}Basic Graph-Theoretic Topics}{17}
  {4.2}Graph evolution and decomposition}{19}
