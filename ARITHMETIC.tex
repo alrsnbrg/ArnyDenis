@@ -1,4 +1,4 @@
-%version of 03-14-18
+%version of 04-13-18
 
 \chapter{ARITHMETIC}
 \label{ch:arithmetic}
@@ -124,18 +124,22 @@ numbers.
 \subsubsection{The integers}
 \label{sec:integers}
 
-The most basic class of numbers are the {\it
-  integers}\index{number!integer} (or, {\it whole
-  numbers},\index{whole numbers} or, {\em counting
-  numbers}).\index{counting numbers}  These are certainly the numbers
-that our prehistoric ancestors employed in the earliest days of our
-species.
+The most basic class of numbers are the {\it integers}
+\index{number!integer}
+(or, {\it whole numbers},
+\index{number!integer!whole number}
+or, {\em counting numbers}).
+\index{number!integer!counting number}
+%
+Integers are certainly the numbers that our prehistoric ancestors
+employed in the earliest days of our species.
 
 \medskip
 
-\addcontentsline{toc}{paragraph}{A. Integers and the number line}
-\noindent{\small\sf A. Integers and the number line.}\index{number!the
-  number line}
+\addcontentsline{toc}{paragraph}{A. Integers and their number line}
+\noindent {\small\sf A. Integers and their number line.}
+\index{number!the number line}
+\index{number!integer!the number line}
 %
 We survey a number of the most important properties of the set
 $\Z$\index{$\Z$: the set of all integers} that comprises {\em all
@@ -147,7 +151,10 @@ both mathematics and its manifold applications.
 
 Several essential properties of $\N$ and $\Z$ are consequences of the
 sets' behavior under their natural order relations: strong ($<$) and
-weak ($\leq$) and their converses.
+weak ($\leq$) and their converses.  Indeed, order within a number
+system is one of one's biggest friends when reasoning about the
+numbers within the system.
+\index{number!ordering of numbers}
 \begin{itemize}
 \item
 The set $\Z$ is {\em totally ordered}\index{number!integer!total
@@ -189,12 +196,13 @@ line: $0, 1, 2, \ldots$.
 \[ (1) \ a=b \ \ \ \ \ \ \ (2) \ a<b \ \ \ \ \ \ \ (3) \ a>b \]
 
 \item
-The set $\N$ is {\it well-ordered}.\index{number!nonnegative
-  integers!well-ordering}\index{nonnegative!integers!well-ordering}
+The set $\N$ is {\it well-ordered}.
+\index{number!nonnegative integers!well-ordering}
+\index{nonnegative!integers!well-ordering}
 
 \medskip
 
-{\it The Well-ordering law for nonnegative integers}.
+{\it The Well-ordering law for nonnegative integers}. \\
 %
 {\it Every subset of $\N$ has a smallest element (under the ordering
   $<$).}
@@ -202,9 +210,21 @@ The set $\N$ is {\it well-ordered}.\index{number!nonnegative
 \medskip
 
 \item
-The set $\Z$ obeys the {\it ``Between''
-  Laws}\index{number!integer!''Between'' laws}\index{integer!''Between''
-  laws}
+The set $\Z$ is {\it discrete}.
+\index{number!integer!discreteness}\index{integer!discreteness}
+
+\medskip
+
+{\it The discreteness of the integers.} \\
+%
+{\it For every integer $a \in \Z$, there is no integer between $a$ and
+  $a+1$; i.e., there is no $b \in \Z$ such that $a < b < a+1$.}
+
+\medskip
+
+\item
+The set $\Z$ obeys the {\it ``Between'' Laws}
+\index{number!integer!''Between'' laws}\index{integer!''Between'' laws}
 
 \medskip
 
@@ -271,16 +291,55 @@ so that $p_1 < p_2 < \cdots < p_r$.
 \noindent
 A positive integer $n$ is totally characterized by its canonical prime
 factorization, as attested to by the following classical theorem,
-which we cite without proof.
+which has been known for millennia and has been honored with the title
+{\em The Fundamental Theorem of Arithmetic}.
+\index{Fundamental Theorem of Arithmetic}
+We state the Theorem in two equivalent ways which suggest different
+ways of thinking about the result.
 
-\begin{theorem}\index{Fundamental Theorem of Arithmetic}
+\begin{theorem}[The Fundamental Theorem of Arithmetic]
+\index{Fundamental Theorem of Arithmetic}
 \label{thm:Fund-Thm-Arith}
+
+\noindent
+{\rm (Traditional formulation.)}
+%
 The canonical prime factorization of every positive integer is unique.
+
+\noindent
+{\rm (Alternative formulation.)}
+%
+Let $n \in \N^+$ be a positive integer, and let $\widehat{P}_n$ denote the
+ordered sequence of prime numbers that are no larger than $n$:
+\[
+\begin{array}{cl}
+\widehat{P}_n \ = \ & \langle P_1, \ P_3, \ \ldots, \ P_{r-1}, \ P_r \rangle \\
+\mbox{where:}   & P_1 \ = \ 2 \\
+                & \mbox{each } \ \ P_i \ < \ P_{i+1} \\
+                & P_r \ \leq \ n.
+\end{array}
+\]
+There exists a unique sequence of {\em nonnegative} integers, 
+$\langle a_1, a_2, \ldots, a_r \rangle$
+such that
+\[
+n \ = \ \prod_{i=1}^r \ P^{a_i} \ = \
+P^{a_1} \cdot P^{a_2} \cdot \ \cdots \ \cdot P^{a_{r-1}} \cdot P^{a_r}
+\]
 \end{theorem}
 
-This theorem has been known for millennia and has been honored with
-the title {\em The Fundamental Theorem of
-  Arithmetic}.\index{Fundamental Theorem of Arithmetic}
+A simple, yet important, corollary of Theorem~\ref{thm:Fund-Thm-Arith}
+is the following result, whose proof we leave to the reader.
+
+\begin{prop}
+\label{thm:prime-divisor}
+Every positive integer is divisible by at least one prime number.
+\end{prop}
+
+The  proof of Theorem~\ref{thm:Fund-Thm-Arith} goes beyond the scope
+of this book.  We do discuss a number of applications of this
+fundamental result.  We have already seen one application in
+Proposition~\ref{thm:Primes-infinite}.
 
 One very important application of Theorem~\ref{thm:Fund-Thm-Arith} is
 as a mechanism for {\em encoding}\index{number!using the Fundamental
@@ -289,20 +348,20 @@ as a mechanism for {\em encoding}\index{number!using the Fundamental
 %
 sequences of positive integers as single integers!  This works as
 follows.  Consider the (infinite) ordered sequence of {\em all primes:}
-\[ (q_1 = 2), (q_2 = 3), (q_3 = 5), \ldots  \]
+\[ (P_1 = 2), (P_2 = 3), (P_3 = 5), \ldots  \]
 Let
 \begin{equation}
 \label{eq:sequence-vec-s}
-\vec{s} \ = \ \langle m_1, m_2, \ldots, m_k \rangle
+\bar{s} \ = \ \langle m_1, m_2, \ldots, m_k \rangle
 \end{equation}
 be an arbitrary sequence of positive integers.  Then
 Theorem~\ref{thm:Fund-Thm-Arith} assures us that the (single) positive
 integer
 \[ 
-\iota(\vec{s}) \ \eqdef \ q_1^{m_1} \times q_2^{m_2} \times \cdots
-\times q_k^{m_k}
+\iota(\bar{s}) \ \eqdef \ P_1^{m_1} \cdot P_2^{m_2} \cdot \ \cdots \
+\cdot P_k^{m_k}
 \]
-is a (uniquely decodable) integer-representation of sequence $\vec{s}$.
+is a (uniquely decodable) integer-representation of sequence $\bar{s}$.
 
 We return to this idea of encoding-via-integers in a later chapter.
 
@@ -389,7 +448,8 @@ $0/1 = 0$ and $1/1 = 1$.
 
 \medskip
 
-{\it ii. The rational and integer number lines.}\index{the rational number line}
+{\it ii. The rational and integer number lines.}
+\index{the rational number line}
 %
 The rational numbers share some, but not all, of the number-line laws
 enumerated in Section~\ref{sec:integers}.A.  We mirror for $\Q$ that
@@ -478,7 +538,7 @@ Cantor addressed this question, and related ones, in his
 groundbreaking study of the relative ``sizes'' of infinte sets
 \cite{Cantor74,Cantor78}.  We adapt enough of his formulation to
 suggest how such issues can be dealt with mathematically.  We shall
-take a longer look at Cantor's work in Section~\ref{sec:order}.
+take a longer look at Cantor's work in Section~\ref{sec:complexes}
 
 Let us take our lead from finite sets.  Is there a notion of
 ``bigger'' for finite sets that can be extended to infinite sets?
@@ -544,8 +604,7 @@ $\Q$ is at least as big as $\Z$.
 Therefore, $\Z$ is at least as big as $\Q$.
 \end{prop}
 
-\noindent {\it Verification}. \\
-%
+\begin{proof}
 (a) We have already established part (a), via the injection from $\Z$
 into $\Q$ implicit in (\ref{eq:ZintoQ}).
 
@@ -592,6 +651,7 @@ Theorem~\ref{thm:Fund-Thm-Arith} guarantees that $f_2$ maps $\Q^+$
 \end{enumerate}
 Since the composition of two injections is also an injection (see
 Proposition~\ref{thm:fn-composition}), the result is proved.  \qed
+\end{proof}
 
 \subsubsection{The real numbers}
 \label{sec:reals}
@@ -768,8 +828,7 @@ of the theorem's myriad applications.
 The real number $\sqrt{2} = 2^{1/2}$ is not rational.
 \end{prop}
 
-\noindent {\it Verification}.
-%
+\begin{proof}
 We prove the result by contradiction,\index{proof by contradition}
 a proof technique described in Chapter~\ref{sec:practical-logic}.
 
@@ -823,8 +882,8 @@ common prime divisor!
 
 Since every step of our argument is ironclad---except for our
 assumption that $\sqrt{2}$ is rational, we conclude that that
-assumption is false!  The Proposition is verified!
-\qed
+assumption is false!  The Proposition is verified!  \qed
+\end{proof}
 
 \begin{quote}\index{Proof by contradiction}
 The proof of Proposition~\ref{thm:sqrt(2)} is a classical (and early)
@@ -837,21 +896,619 @@ Section~\ref{sec:practical-logic}.
 \subsubsection{The complex numbers}
 \label{sec:complexes}
 
+\addcontentsline{toc}{paragraph}{A. The basics of the complex numbers}
+\noindent{\small\sf A. The basics of the complex numbers.}
+%
 $\C$ denotes the complex numbers
 
+Each complex number $\kappa = a+bi \in \C$ has a {\it real part}---the
+part that {\em does not} involve the imaginary unit $i$---and an {\it
+  imaginary part}---the part that {\em does} involve $i$.  To be
+explicit: the real part of our number $\kappa$, is Re$(\kappa) = a$;
+\index{complex number!real part Re($\cdot$)}
+the {\it imaginary part} of our number $\kappa$,is Im$(\kappa) = b$.
+\index{complex number!imaginary part Im($\cdot$)}
+The notation Re$(\kappa)$ and Im$(\kappa)$ is common but not
+universal.
 
-\subsection{Order within the Number System}
-\label{sec:order}
+\index{complex number!multiplication!three real multiplications}
+Using the basic arithmetic laws that we have discussed thus far, plus
+the defining equation, $i^2 = -1$, of the imaginary unit $i$, we find
+that the {\em product} of two complex numbers, $a+bi \in \C$ and $c+di
+\in \C$ is the complex number, call it $\kappa$,
+\begin{equation}
+\label{eq:complex-mult}
+\kappa \ = \ (a+bi) \cdot (c+di) \ = \ (ac - bd) + (ad + bc)i.
+\end{equation}
+We note that a ``direct'' implementation of complex multiplication,
+i.e., one that implements (\ref{eq:complex-mult}) literally, requires
+four real multiplications---namely, $ac, bd, ad, bc$.
 
-One of one's biggest friends when reasoning about numbers resides in
-the concept of {\em order}.\index{number!ordering of numbers}
+During the 1960s, people first began to pay close attention to the
+costs associated with various ways of achieving computational results.
+They sought---and found---a number of procedures that replaced
+computations involving $k$ real multiplications (a relatively
+expensive operation) and $\ell$ real additions (a relatively
+inexpensive operation) by computations that achieved the same result
+but used fewer multiplications and not too many more additions.
+Complex multiplication was one of the operations they studied.  Here
+is the result.
 
+\addcontentsline{toc}{paragraph}{-- A fun result: complex
+  multiplication via $3$ real multiplications}
+\index{complex number!multiplication via 3 real multiplications}
 
+\begin{prop}
+\label{thm:complex-mult-3real}
+One can compute the product of two complex numbers using {\em three}
+real multiplications rather than four.
+\end{prop}
 
+\begin{proof}
+Although implementing (\ref{eq:complex-mult}) ``directly'' correctly
+produces the product $\kappa = (a+bi) \cdot (c+di)$, there is another
+implementation that is {\em more efficient}.  Specifically, the
+following recipe computes $\kappa$ using only {\em three} real
+multiplications instead of the four real multiplications of the
+``direct'' implementation.  We begin to search for this recipe by
+noting that our immediate goal is to compute both Re$(\kappa) = ac-bd$
+and Im$(\kappa) = ad+bc$.  We can accomplish this by computing the
+{\em three} real products
+\begin{equation}
+\label{eq:complex-mult-3a}
+(a+b) \cdot (c+d); \ \ \ \ \
+ac;  \ \ \ \ \ bd
+\end{equation}
+and then noting that
+\begin{equation}
+\label{eq:complex-mult-3b}
+\begin{array}{lcl}
+\mbox{Re}(\kappa) & = & (a+b) \cdot (c+d) - ac -bd, \\
+\mbox{Im}(\kappa) & = & ac -bd
+\end{array}
+\end{equation}
+We thereby achieve the result of the complex multiplication described
+in (\ref{eq:complex-mult}) while using only {\em three} real
+multiplications.
 
-**HERE-ORDER
+Of course, a full reckoning of the costs of the two implementations we
+have discussed exposes the fact that the implementation that invokes
+(\ref{eq:complex-mult-3a}) and (\ref{eq:complex-mult-3b}) uses {\em
+  three} real additions rather than the {\em two} real additions of
+the ``direct'' implementation.  But this entire exercise was
+predicated on the observation that each real addition is much less
+costly than a real multiplication, so trading one multiplication for
+one addition is an unqualified ``win''.  \qed
+\end{proof}
 
+\medskip
 
+\addcontentsline{toc}{paragraph}{B. Pairing functions:
+  ordering $\C$ and $\N \times \N$}
+\noindent{\small\sf B. Pairing functions: ordering $\C$ and $\N \times \N$.}
+%
+As noted in Section~\ref{sec:integers}.A, ``order within a number
+system is one of one's biggest friends when reasoning about the
+numbers within the system.''  This section is devoted to showing that,
+even when a number system lacks intrinsic desirable ordering
+properties, we can sometimes endow the system with ``inherited
+access'' to such properties by devising a {\em bijection} that {\it
+  encodes}
+\index{pairing functions as encodings}
+%
+the system's numbers as nonnegative integers.  We focus here on two
+important number systems, the rational and complex numbers, $\Q$ and
+$\C$, whose ordering properties are much weaker than those of the
+nonnegative integers $\N$: Neither $\Q$ nor $\C$ is {\em
+  well-ordered}; $\C$ is not even {\em totally} ordered.
+\begin{quote}
+{\em Well-ordering} is an especially welcome property because it
+enables algorithms that are structured as a linear recursion that
+``counts down'' from an argument $n$.  Well-ordering guarantees that
+there is a ``bottom'' that will terminate the downward recursion.
+\end{quote}
+
+\noindent
+Two simplifications facilitate our quest for bijective encodings
+\[ \varepsilon_1: \Q \leftrightarrow \N \ \ \ \ \ \mbox{ and }
+\ \ \ \ \ \varepsilon_2: \C \leftrightarrow \N
+\]
+\begin{itemize}
+\item
+We abstract both $\Q$ and $\C$ as the set $\N \times \N$.  Since both
+$\Q$ and the 
+\index{numbers!complex integers}
+%
+{\it complex integers}---complex numbers $a+bi$ where $a,b \in
+\N$---can be encoded as ordered pairs of nonnegative integers, this is
+a natural abstraction.
+
+Of course, using this abstraction to encode $\Q$ into $\N$ ignores
+common (integer) divisors of a fraction's numerator and denominator,
+whose elimination preserve the fraction's value.  A very simple
+algorithm would compensate for this.
+
+\item
+We slightly change our agenda and focus on bijections between $\N^+
+\times \N^+$ and $\N^+$, where $\N^+$ is the set of {\em positive}
+integers.
+\index{number!integer!positive integer}
+\index{$\N^+$:number!integer!positive integer}
+
+Focusing on {\em positive} integers rather than {\em nonnegative}
+integers somewhat simplifies certain mathematical expessions.
+\end{itemize}
+The structures of the domain $\N \times \N$ and the range $\N$ of the
+bijective encodings of interest have led to the name {\it pairing
+  functions}
+\index{pairing function}\index{pairing function as encoding}
+for these bijections.
+
+\smallskip
+
+We now embark on a short guided tour of the world of pairing
+functions.
+
+\medskip
+
+\noindent {\it i. The Diagonal pairing function $\d$.}
+\index{The Diagonal pairing function $\d$}
+%
+Pairing functions first appeared in the literature early in the 19th
+century.  Perhaps the simplest and ``prettiest'' such function (since
+it is a {\em polynomial}) appears, pictorially, in an 1821 work by the
+great French mathematician Augustin Cauchy \cite{Cauchy21}.
+\index{Cauchy, Augustin}
+%
+This {\em diagonal} pairing function was formally specified a
+half-century later by the German logician Georg Cantor,
+\index{Cantor, Georg}
+%
+whose studies \cite{Cantor74,Cantor78} revolutionized how we think
+about infinite sets.
+\begin{equation}
+\label{eq:diag}
+\d(x, y) \ = \
+{{x+y-1} \choose 2} + y \ = \ \frac{(x+y) \cdot (x+y-1)}{2} + y
+\end{equation}
+($\d$ of course has a twin that exchanges $x$ and $y$).  $\d$'s
+mapping of $\N^+ \times \N^+$ onto $\N^+$, as depicted in
+Fig.~\ref{fig:diag}, exposes that we can view $\d$ as:
+\begin{figure}[htb]
+\begin{center}
+\begin{tabular}{r|r|r|r|r|r|r|r|r}
+ 1 &  3 &  6 & 10 & \fbox{15} &  21 &  28 &  36 & $\cdots$ \\
+ 2 &  5 &  9 & \fbox{14} & 20 &  27 &  35 &  44 & $\cdots$ \\
+ 4 &  8 & \fbox{13} & 19 & 26 &  34 &  43 &  53 & $\cdots$ \\
+ 7 & \fbox{12} & 18 & 25 & 33 &  42 &  52 &  63 & $\cdots$ \\
+\fbox{11} & 17 & 24 & 32 & 41 &  51 &  62 &  74 & $\cdots$ \\
+16 & 23 & 31 & 40 & 50 &  61 &  73 &  86 & $\cdots$ \\
+22 & 30 & 39 & 49 & 60 &  72 &  85 &  99 & $\cdots$ \\
+29 & 38 & 48 & 59 & 71 &  84 &  98 & 113 & $\cdots$ \\
+$\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ &
+  $\vdots$ & $\vdots$ & $\ddots$
+\end{tabular}
+\end{center}
+\caption{{\it The diagonal pairing function $\d$.  The shell $x+y = 6$ is
+highlighted.}
+\label{fig:diag}}
+\end{figure}
+\begin{enumerate}
+\item
+partitioning $\N^+ \times \N^+$ into ``diagonal shells'' defined as
+\[
+\{ \langle x,y \rangle \ | \ x+y = 2 \}, \ \ 
+\{ \langle x,y \rangle \ | \ x+y = 3 \}, \ \ 
+\{ \langle x,y \rangle \ | \ x+y = 4 \}, \ \ \ldots
+\]
+This is accomplished by the following subexpression in (\ref{eq:diag}).
+\[
+{1 \over 2} (x+y) \cdot (x+y-1) \ = \ {{x+y-1} \choose 2}
+\]
+
+\item
+``climbing up'' these shells in order.
+
+This is accomplished by the additional subexpression ``$+y$'' in
+(\ref{eq:diag}).
+\end{enumerate}
+Understanding $\d$'s structure leads to an inductive verification of
+$\d$'s bijectiveness.\footnote{A computationally more satisfying proof
+  of $\d$'s bijectiveness appears in \cite{Davis58}, along with an
+  explicit recipe for computing its inverse.}
+
+\noindent
+************** \\
+DO THE INDUCTION \\
+**************
+
+\begin{quote}
+The fact that $\d$ is a {\em polynomial} in $x$ and $y$ raises the
+natural (to a mathematician!)~question of whether there are other
+polynomial pairing functions.  This question remains largely open, but
+there are a few nontrivial pieces of an answer.
+\begin{enumerate}
+\item
+There is no {\em quadratic} polynomial pairing function other than
+$\d$ (and its twin) \cite{FueterP23,LewR78a}.
+\item
+No {\em cubic} or {\em quartic} polynomial is a pairing function
+\cite{LewR78b}.
+\item
+The development in \cite{LewR78b} excludes large families of
+higher-degree polynomials from being pairing functions; e.g., a {\em
+  super-quadratic} polynomial whose coefficients are all positive
+cannot be a pairing function.
+\end{enumerate}
+\end{quote}
+
+\ignore{****************
+As we now look at a variety of other pairing functions, we continue
+the convention in Fig.~\ref{fig:diag} and illustrate a pairing
+function $\f: \N^+ \times \N^+ \leftrightarrow \N^+$ via a table whose
+entries are the values of $\f$ as depicted in Fig.~\ref{fig:generic}.
+\begin{figure}[htb]
+\[ \begin{array}{c|c|c|c|c|c}
+\f(1,1) & \f(1,2) & \f(1,3) & \f(1,4) & \f(1,5) & \cdots \\
+\f(2,1) & \f(2,2) & \f(2,3) & \f(2,4) & \f(2,5) & \cdots \\
+\f(3,1) & \f(3,2) & \f(3,3) & \f(3,4) & \f(3,5) & \cdots \\
+\f(4,1) & \f(4,2) & \f(4,3) & \f(4,4) & \f(4,5) & \cdots \\
+\f(5,1) & \f(5,2) & \f(5,3) & \f(5,4) & \f(5,5) & \cdots \\
+\vdots  & \vdots  & \vdots  & \vdots  & \vdots  & \ddots
+\end{array} \]
+\caption{{\it A generic template for sampling from a pairing function.}
+\label{fig:generic}}
+\end{figure}
+
+One possible application of pairing functions is to store
+arrays/tables in an {\em extendible} manner.  It has been recognized
+since the 1950s that many classes of computations, ranging from
+linear-algebraic scientific applications to (relational) databases,
+benefit from the ability to reshape multidimensional arrays and tables
+dynamically.  While several programming languages allow a user to
+specify at least some types of reshapings---say, the addition and/or
+deletion of rows and/or columns in two dimensions---most of their
+processors implement the capability quite naively, by completely
+remapping an array/table with each reshaping.  This is, of course,
+very wasteful of time, since one does $\Omega(n^2)$ work to
+accommodate $O(n)$ changes.  Adapting pairing functions for
+array/table storage obviates this reshaping and its attendant wasted
+effort.
+************}
+
+\medskip
+
+\noindent {\it ii. A methodology for constructing pairing functions.}
+\index{constructing pairing functions via ``shells''}
+\index{pairing functions as storage mappings for arrays/tables}
+%
+The shell-oriented strategy that underlies the diagonal pairing
+function $\d$ can be adapted to incorporate shell-``shapes'' that are
+inspired by a variety of computational situations---and can be applied
+to great computational advantage in such situations.  We describe how
+such adaptation can be effected, and we describe a few explicit shapes
+and situations.  We invite the reader to craft others.
+
+\medskip
+
+\noindent {\underline{\bf Procedure}} {\small\sf PF-Constructor}($\a$) \\
+/*Construct a shape-inspired pairing function (PF) $\a$*/
+\begin{description}
+\item[Step 1.]
+%
+Partition the set $\N^+ \times \N^+$ into finite sets called {\it
+  shells}.  Order the shells linearly in some way: many natural
+shell-partitions carry a natural order.
+\end{description}
+As noted above, Shell $c$ of the diagonal pairing function $\d$ is the
+following subset of $\N^+ \times \N^+$: $\{ \langle x,y \rangle \ |
+\ x+y = c \}$.  The parameter $c$ orders $\d$'s shells.
+
+\begin{description}
+\item[Step 2.]
+Construct a pairing function from the shells as follows.
+  \begin{description}
+  \item[Step 2a.]
+Enumerate $\N^+ \times \N^+$ shell by shell, honoring the ordering of
+the shells; i.e., list the pairs in shell \#1, then shell \#2, then
+shell \#3, etc.
+  \item[Step 2b.]
+Enumerate each shell in some systematic way, e.g., ``by columns'':
+Enumerate the pairs $\langle x,y \rangle$ in each shell in increasing
+order of $y$ and, for pairs having equal $y$ values, in decreasing
+order of $x$.
+  \end{description}
+\end{description}
+
+\begin{prop}
+\label{thm:PF-construct}
+Any function $\a: \N^+ \times \N^+ \leftrightarrow \N^+$ that is
+designed via Procedure {\small\sf PF-Constructor} is a bijection.
+\end{prop}
+
+\proof{(Sketch) Step 1 of Procedure {\small\sf PF-Constructor}
+constructs a partial order on $\N^+ \times \N^+$, in which: ($a$) each
+shell is finite; ($b$) there is a linear order on the shells.  Step 2
+extends this partial order to a linear order, by honoring the inherent
+ordering of shells and imposing a linear order within each shell.  The
+function constructed via the Procedure is: {\em injective} because the
+disjoint shells are enumerated sequentially; {\em surjective} because
+the enumeration within each shell begins immediately after the
+enumeration within the preceding shell, with no gap.}  \qed
+
+We have noted how to use Procedure {\small\sf PF-Constructor} to
+construct pairing function $\d$.  We now use the Procedure to design
+two other useful pairing functions.
+
+\medskip
+
+\noindent {\it iii. The Square-shell pairing function $\s$.}
+\index{The Square-shell pairing function $\s$}
+%
+One computational situation where pairing functions can be useful
+involves storage-mappings for arrays/tables that can expand and/or
+contract dynamically.  In conventional systems, when one expands an $n
+\times n$ table into an $(n+1) \times (n+1)$ table, one allocates a
+new region of $(n+1)^2$ storage locations and copies the current table
+from its $n^2$-location region to the new region.  Of course, this is
+very wasteful: one is moving $\Omega(n^2)$ items to make room for the
+anticipated $2n+1$ new items.  On any given day, the practical impact
+of this waste depends on current technology.  But, this is a
+mathematics text, not an engineering one, so we are exploring whether
+{\em in principle} we can avoid the waste.  The answer is ``YES''.  If
+we employ a pairing function $\varepsilon: \N^+ \times \N^+
+\leftrightarrow \N^+$ to allocate storage for tables, then to expand a
+table from dimensions $n \times n$ to $(n+1) \times (n+1)$, we need
+move only $O(n)$ items to accommodate the {\em new} table entries; the
+current entries need not be moved.  For square tables, the following
+{\it Square-shell} pairing function $\s$ manages the described
+scenario perfectly.  After describing $\s$, we comment on managing
+tables of other shapes.
+\begin{figure}[htb]
+\begin{center}
+\begin{tabular}{r|r|r|r|r|r|r|r|r}
+  1 &  4 &  9 & 16 & \fbox{25} &  36 &  49 &  64 & $\cdots$ \\
+  2 &  3 &  8 & 15 & \fbox{24} &  35 &  48 &  63 & $\cdots$ \\
+  5 &  6 &  7 & 14 & \fbox{23} &  34 &  47 &  62 & $\cdots$ \\
+ 10 & 11 & 12 & 13 & \fbox{22} &  33 &  46 &  61 & $\cdots$ \\
+\fbox{17} & \fbox{18} & \fbox{19} & \fbox{20} & \fbox{21} &  32 &  45
+  &  60 & $\cdots$ \\ 
+ 26 & 27 & 28 & 29 & 30 &  31 &  44 &  59 & $\cdots$ \\
+ 37 & 38 & 39 & 40 & 41 &  42 &  43 &  58 & $\cdots$ \\
+ 50 & 51 & 52 & 53 & 54 &  55 &  56 &  57 & $\cdots$ \\
+$\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ &
+  $\vdots$ & $\vdots$ & $\ddots$
+\end{tabular}
+\end{center}
+\caption{{\it The square-shell pairing function $\s$.  The shell
+    $\max(x,y) = 5$ is highlighted.}
+\label{f.square}}
+\end{figure}
+\begin{equation}
+\label{e.square}
+\begin{array}{ccl}
+\s(x, y) & = & m^2 + m + y-x+1 \\
+ & & \mbox{where } \ \ \  m \ \eqdef \ \max(x-1,y-1).
+\end{array}
+\end{equation}
+One sees in Fig.~\ref{f.square} that $\s$ follows the prescription of
+Procedure PF-Constructor: (1) it maps integers into the ``square
+shells'' defined by: $m = 0, \ m = 1, ...$.  (2) it enumerates the
+entries in each shell in a counterclockwise direction.  (Of course,
+$\s$ has a twin that enumerates the shells in a clockwise direction.)
+\begin{quote}
+Using somewhat more complicated instantiations of Procedure
+PF-Constructor, the study in \cite{Rosenberg75} adapts the
+square-shell pairing function $\s$ to: ($a$) accommodate, with no
+wastage, arrays/tables of any fixed aspect ratio $an \times bn$ ($a,b
+\in \N$); ($b$) accommodate, with only $O(n)$ wastage, arrays/tables
+whose aspect ratios come from a fixed finite set of candidates---i.e.,
+$(a_1 n \times b_1 n)$ or $(a_2 n \times b_2 n)$ or \ldots or $(a_k n
+\times b_k n)$.
+\end{quote}
+
+\medskip
+
+\noindent {\it iv. The Hyperbolic-shell pairing function $\h$.}
+\index{The Hyperbolic-shell pairing function $\h$}
+%
+We have just seen, in paragraphs (ii) and (iii), that when the growth
+patterns of one's arrays/tables is very constrained, one can use
+pairing functions as storage mappings with very little wastage.  In
+contrast, if one employs a pairing function such as $\d$ without
+consideration of its wastage, then a storage map would show some
+$O(n)$-entry tables being ``spread'' over $\Omega(n^2)$ storage
+locations.  In the worst-case, $\d$ spreads the $n$-position $1 \times
+n$ array/table over $> {1 \over 2} n^2$ addresses: $\d(1,1) = 1$ and
+$\d(1,n) = {1 \over 2} (n^2 + n)$.  This degree of wastefulness can be
+avoided via careful analysis, coupled with the use of Procedure
+PF-Constructor.  The target commodity to be minimized is the {\it
+  spread} of a PF-based storage map, which we define as follows.
+\index{the spread of a pairing function}
+
+Note that an ordered pair of integers $\langle x,y \rangle$ appears as
+a position-index within an $n$-position table if, and only if, $xy
+\leq n$.  Therefore, we define the spread of a PF-based storage map
+$\m$ via the function
+\begin{equation}
+\label{e.compact}
+{\bf S}_{\cal M}(n) \ \eqdef \ \max\{ \m(x, y) \ | \ xy \leq n \}.
+\end{equation}
+${\bf S}_{\cal M}(n)$ is the largest ``address'' that PF $\m$ assigns
+to any position of a table that has $n$ or fewer positions.
+
+Happily, the tools we have developed enable us to design a pairing
+function that (to within constant factors) has minimum worst-case
+spread.  This is the {\em Hyperbolic-shell pairing function} $\h$ of
+(\ref{e.hyper}) and Fig.~\ref{f.hyper}.\footnote{Details appear in
+  \cite{Rosenberg74,Rosenberg75}.}
+\begin{equation}
+\label{e.hyper}
+\begin{array}{lcll}
+\multicolumn{4}{l}{\mbox{Let $\delta(k)$ be the number of divisors of
+    the integer $k$.}} \\
+\h(x,y) & = & {\displaystyle \sum_{k=1}^{xy-1} \delta(k) \ \ +} &
+  \mbox{the position of } \ \langle x, y \rangle \ \mbox{ among 2-part} \\
+        &   &  & \mbox{factorizations of the number $xy$, in} \\
+        &   &  & \mbox{reverse lexicographic order}
+\end{array}
+\end{equation}
+\begin{figure}[htb]
+\begin{center}
+\begin{tabular}{r|r|r|r|r|r|r|r}
+ 1 &  3 &  5 &   8 &  10 & \fbox{14} &  16  & $\cdots$ \\
+ 2 &  7 & \fbox{13} &  19 &  26 &  34 &  40 & $\cdots$ \\
+ 4 & \fbox{12} & 22 &  33 &  44 &  56 &  69 & $\cdots$ \\
+ 6 & 18 & 32 &  48 &  64 &  81 &  99  & $\cdots$ \\
+ 9 & 25 & 43 &  63 &  86 & 108 & 130  & $\cdots$ \\
+\fbox{11} & 31 & 55 &  80 & 107 & 136 & 165 & $\cdots$ \\
+15 & 39 & 68 &  98 & 129 & 164 & 200  & $\cdots$ \\
+17 & 47 & 79 & 116 & 154 & 193 & 235  & $\cdots$ \\
+$\vdots$ & $\vdots$ & $\vdots$  & $\vdots$ & $\vdots$ &
+  $\vdots$ & $\vdots$ & $\ddots$
+\end{tabular}
+\end{center}
+\caption{{\it The hyperbolic pairing function $\h$.  The shell $xy = 6$ is
+highlighted.}
+\label{f.hyper}}
+\end{figure}
+
+\begin{prop}[\cite{Rosenberg75}]
+\label{thm:hyp-opt}
+{\bf (a)}
+%
+The hyperbolic function $\h$ is a pairing function.
+
+{\bf (b)}
+%
+The spread of $\h$ is given by
+\[ {\bf S}_{\cal H}(n) \ = \ O(n \log n), \]
+
+{\bf (c)}
+%
+No pairing function has better compactness (in the worst case) by more
+than a constant factor.
+\end{prop}
+
+\begin{proof}
+{\bf (a)} The fact that $\h$ is a pairing function follows from
+Proposition~\ref{thm:PF-construct}.
+
+{\bf (b)}
+%
+The pairing function $\h$ maps integers along the ``hyperbolic
+shells'' defined by $xy = 1, \ xy =2, \ xy=3, \ldots$.  Hence,
+when an integer $n$ is ``placed'' into the table of values of
+$\h$, the number of occupied slots is within $n$ of
+\[ \sum_{i=1}^{n-1} \ |\{ \langle x,y \rangle \ | \ xy < i \}| 
+\]
+Elementary calculations show that this sum is $O(n \log n)$.
+
+{\bf (c)}
+%
+The optimality of $\h$ in compactness (up to constant factors) is seen
+via the following argument.  The set of tables that have $n$ or fewer
+positions are those of aspect ratios $a_i \times b_i$, where $a_i b_i
+\leq n$.  As one sees from Fig.~\ref{f.hyp} (generalized to arbitrary
+$n$), the union of the positions of all these arrays is the set of
+integer lattice points under the hyperbola $xy = n$.  It is
+well-known---cf.~\cite{NivenZ80}---that this set of points has
+cardinality $\Theta(n \log n)$.  Since every table contains position
+$\langle 1,1 \rangle$, it follows that, for every $n$, some table
+containing $n$ or fewer positions is spread over $\Omega(n \log n)$
+``addresses.''   \qed
+\end{proof}
+\begin{figure}[htb]
+%\centerline{\psfig{figure=pairing.hyp.eps,height=7truecm}}
+\includegraphics[scale=0.4]{pairing-hyp.pdf}
+\caption{{\it The aggregate set of positions of tables having $16$ or
+fewer position.}
+\label{f.hyp}}
+\end{figure}
+
+   
+
+\ignore{*****************
+\noindent {\em Additive pairing functions}
+%
+The study in \cite{Rosenberg02} focuses on pairing functions that are
+{\it additive}: Assign each row $v$ a {\it base task-index} $B_v$ and
+a {\it stride} $S_v$.  Then use the formula
+\[ \t(v, t) \ = \ B_v + (t-1) S_v \]
+to map $\N^+ \times \N^+$ bijectively onto $\N^+$.
+
+{\em A methodology for designing {\em additive} pairing functions.}
+%
+Easily, any additive pairing function must have infinitely many
+distinct strides; i.e., $S_x$, viewed as a function of $x$, must have
+infinite range.  Despite this, that there do exist easily computed
+additive pairing functions.  One strategy for designing such pairing
+functions builds on the following well-known property of the set \O\/
+of positive odd integers.
+
+\begin{lemma}[\cite{NivenZ80}]
+\label{l.odds}
+For any positive integer $c$, every odd integer can be written
+in precisely one of the $2^{c-1}$ forms:
+\[ 2^c n +1, \ 2^c n +3, \ 2^c n +5, \ldots, \ 2^c n + (2^c -1), \]
+for some nonnegative integer $n$.
+\end{lemma}
+
+\noindent
+One builds on Lemma~\ref{l.odds} to construct additive pairing
+functions (APFs) in the following manner.
+
+\paragraph{\underline{Procedure}} {
+\small\sf APF-Constructor}($\t$) \\
+/*Construct an APF $\t$*/
+\begin{description}
+\item[Step 1.]
+Partition the set of row-indices into {\it groups} whose sizes are
+powers of 2 (with any desired mix of equal-size and distinct-size
+groups).  Order the groups linearly in some (arbitrary) way.
+\end{description}
+/*One can now talk unambiguously about group 0 (whose members share
+{\it group-index} $g=0$), group 1 (whose members share group-index
+$g=1$), and so on.*/
+\begin{description}
+\item[Step 2.]
+Assign each group a distinct copy of the set \O, as well as a {\it
+copy-index} $\kappa(g)$ expressed as a function of the group-index
+$g$.
+
+\item[Step 3.]
+Allocate group $g$'s copy of \O\/ to its members via the $(c =
+\kappa(g))$ instance of Lemma~\ref{l.odds}, using the multiplier $2^g$
+as a {\it signature} to distinguish group $g$'s copy of the set \O\/
+from all other groups' copies.
+\end{description}
+One can specify the procedure's APFs in a computationally friendly
+way.
+
+{\em An explicit expression for $\t$.}
+If we denote the $2^{\kappa(g)}$ rows of group $g$ as $x_{g,1}$,
+$x_{g,2}$, \ldots, $x_{g,2^{\kappa(g)}}$, then for all $i \in \{ 1, 2,
+\ldots, 2^{\kappa(g)} \}$,
+\begin{equation}
+\label{e.define.t}
+\t(x_{g,i}, y) \ \eqdef \
+2^g \left[ 2^{1 + \kappa(g)}(y-1) +
+	(2x_{g,i} +1 \bmod 2^{1 + \kappa(g)}) \right]
+\end{equation}
+
+\begin{theorem}
+\label{t.define.ataf}
+Any function $\t: \N^+ \times \N^+ \leftrightarrow \N^+$ that is
+designed via Procedure {\small\sf APF-Constructor}, hence is of the
+form (\ref{e.define.t}), is a valid additive pairing function whose
+base row-entries and strides satisfy
+\begin{equation}
+\label{e.genl.b.s}
+B_x \ \leq \
+S_x \ =    \ \t(x, y+1) - \t(x,y) \ = \ 2^{1 + g + \kappa(g)}.
+\end{equation}
+\end{theorem}
+*********************}
 
 
 
@@ -1015,8 +1672,9 @@ the classes of numbers we have described.
 \noindent {\small\sf  The operations of arithmetic}\index{arithmetic!basic operations}
 %
 Arithmetic on the four classes of numbers that we have described is
-built upon the following operations.  When we say that an operation
-produces a number ``of the same sort'', we mean that it produces
+built upon a rather small repertoire of operations.  When we say that
+an operation produces a number ``of the same sort'', we mean that it
+produces
 \begin{itemize}
 \item
 an integer result from integer arguments;
@@ -1029,15 +1687,16 @@ a complex (number) result from complex (number) arguments;
 \end{itemize}
 The fundamental operations on numbers are, of course, familiar to the
 reader.  Our goal in discussing them is to stress the laws that govern
-the operations.
+the operations.  Along the way, we also introduce a few operations
+that are less familiar but no less important.
 
 \subsubsection{Unary (single-argument) operations}
 
-\addcontentsline{toc}{paragraph}{A. Negating numbers}
-\noindent {\small\sf A. Negating numbers.}
+\addcontentsline{toc}{paragraph}{A. Negating and reciprocating numbers}
+\noindent {\small\sf A. Negating and reciprocating numbers.}
 \index{arithmetic!basic operations!negation}
 %
-The operation of {\it negation:}
+\noindent {\it i. The operation of {\em negation}}:
 \index{arithmetic!basic operations!negating}
 \begin{itemize}
 \item
@@ -1052,16 +1711,13 @@ whenever both $a$ and $-a$ belong to the nonnegative subset being
 operated on.
 \end{itemize}
 Zero ($0$) is the unique {\it fixed point}\index{function!fixed
-  point}\index{aritmetic!megation!fixed point} of the operation,
+  point}\index{arithmetic!negation!fixed point} of the operation,
 meaning that $0$ is the unique number $a$ such that $a = -a$.
 
 \medskip
 
-\addcontentsline{toc}{paragraph}{B. Reciprocating numbers}
-\noindent {\small\sf B. Reciprocating numbers}.
+\noindent {\it ii. The operation of {\em reciprocation}}:
 \index{arithmetic!basic operations!reciprocal}
-%
-The operation of {\it reciprocating}
 \begin{itemize}
 \item
 \index{arithmetic!basic operations!reciprocating}
@@ -1077,12 +1733,15 @@ is {\em undefined} on every integer $a$ except for $1$.
 
 \medskip
 
-\addcontentsline{toc}{paragraph}{C. Floors and ceilings}
-\noindent {\small\sf C. Floors and ceilings.}
-\index{arithmetic!basic operations!floors and ceiling}
-%
-The operations of {\it taking floors and ceilings} are total
-operations on the sets $\N, \Z, \Q, \R$:
+\addcontentsline{toc}{paragraph}{B. Floors, ceilings, magnitudes}
+\noindent {\small\sf B. Floors, ceilings, magnitudes.}
+\index{arithmetic!basic operations!floor}
+\index{arithmetic!basic operations!ceiling}
+\index{arithmetic!basic operations!absolute value}
+\index{arithmetic!basic operations!magnitude}
+
+\noindent {\it i. The operations of {\em taking floors and ceilings}}
+are total operations on the sets $\N, \Z, \Q, \R$.
 \begin{itemize}
 \item
 The {\it floor} of a number $a$, also called {\it the integer part}
@@ -1108,8 +1767,7 @@ integers.\index{arithmetic!basic operations!rounding to ``closest'' integer}
 
 \medskip
 
-\addcontentsline{toc}{paragraph}{D. Absolute values, magnitudes}
-\noindent {\small\sf D. Absolute values, magnitudes}
+\noindent {\it ii. The operations of taking {\em absolute values/magnitudes}}:
 \index{arithmetic!basic operations!absolute value, magnitude}
 %
 Let $a$ be a real number.  The {\it absolute value}, or, {\it
@@ -1126,6 +1784,56 @@ a & \mbox{ if } \ [a \in \R] \ \ \mbox{ and } [a \geq 0] \\
 \end{array}
 \right.
 \]
+
+\medskip
+
+\addcontentsline{toc}{paragraph}{C. Factorials (of nonnegative integers)}
+\noindent {\small\sf C. Factorials (of nonnegative integers).}
+\index{arithmetic!basic operations!factorial (of a nonnegative integer)}
+%
+The {\it factorial} of a nonnegative integer $n \in \N$, which is
+commonly denoted $n!$,
+\index{arithmetic!basic operations!$n!$: factorial of $n \in \N$}
+\index{arithmetic!basic operations!factorial of nonnegative integer}
+is the function defined via the following recursion.
+\begin{equation}
+\label{eq:n-factorial-recursion}
+\mbox{\sc fact}(n) \ = \ \left\{
+\begin{array}{cl}
+1 & \mbox{  if } \ n=0 \\
+n \cdot \mbox{\sc fact}(n-1) & \mbox{  if } \ n>0
+\end{array}
+\right.
+\end{equation}
+By ``unwinding'' the recursion in (\ref{eq:n-factorial-recursion}),
+one finds that, for all $n \in \N$,
+\begin{equation}
+\label{eq:n-factorial-direct}
+n! \ = \ \mbox{\sc fact}(n) \ = \ 
+n \cdot (n-1) \cdot (n-2) \cdot \cdots \cdot 2 \cdot 1
+\end{equation} 
+A $3$-step inductive argument validates this ``unwinding'':
+\begin{enumerate}
+\item
+If $n =0$, then {\sc fact}$(n) = 1$, by definition
+(\ref{eq:n-factorial-recursion}).
+\item
+Assume, for induction, that the expansion in
+(\ref{eq:n-factorial-direct}) is valid for a given $k \in N$:
+\[ \mbox{\sc fact}(k) \ = \ k \cdot (k-1) \cdot (k-2) \cdot \cdots
+\cdot 2 \cdot 1 \] 
+\item
+Then:
+\[
+\begin{array}{lclll}
+\mbox{\sc fact}(k+1) & = & (k+1) \cdot \mbox{\sc fact}(k)
+  & & \mbox{by (\ref{eq:n-factorial-recursion})} \\
+  & = &
+(k+1) \cdot k \cdot (k-1) \cdot (k-2) \cdot \cdots \cdot 2 \cdot 1
+  & & \mbox{by induction}
+\end{array}
+\]
+\end{enumerate}
 
 
 \subsubsection{Binary (two-argument) operations}
@@ -1270,16 +1978,195 @@ The operations of multiplication and division are said to be {\em
 can be used to ``undo'' the other:
 \[ a = (a \cdot b) \div b \ = \ (a \div b) \cdot b.  \]
 
+\medskip
 
-\subsection{The Laws of Arithmetic}\index{arithmetic!basic laws}
+\addcontentsline{toc}{paragraph}{C. Binomial coefficients and Pascal's
+triangle}
+\noindent {\small\sf C. Binomial coefficients and Pascal's triangle}.
+\index{arithmetic!basic operations!binomial coefficient}
+%
+We close our catalogue of arithmetic operations with a binary
+operation on\footnote{In advanced contexts, one encounters binomial
+  coefficients with non-integer arguments.}~$\N \times \N$.
+
+Let $n$ and $k \leq n$ be nonnegative integers (i.e., elements of
+$\N$).  The binomial coefficient $\displaystyle {n \choose k}$ is the
+number\index{binomial coefficients}
+\begin{equation}
+\label{eq:binom-coeff}
+{n \choose k} \ = \ \frac{n!}{k!(n-k)!} \ = \
+\frac{n(n-1)(n-2) \cdots (n-k+1)}{k (k-1)(k-2) \cdots 1}
+\end{equation}
+Many of the secrets of these wonderful numbers---including the fact
+that they are {\em integers}---can be deduced from the following
+results.
+
+\begin{prop}
+\label{thm:manipulate-binom-coeff}
+For all $n, k \in \N$ with $k \leq n$:
+
+{\rm (a)} The symmetry rule:
+\index{binomial coefficients!symmetry rule}
+\begin{equation}
+\label{eq:symmetry-binom-coeff}
+{n \choose k} \ = \ {n \choose {n-k}}
+\end{equation}
+
+{\rm (b)} The addition rule:
+\index{binomial coefficients!addition rule}
+\begin{equation}
+\label{eq:add-binom-coeff}
+{n \choose k} \ + \ {n \choose {k+1}} \ = \ {{n+1} \choose {k+1}}
+\end{equation}
+\end{prop}
+
+\begin{proof}
+($a$)
+We verify equation (\ref{eq:symmetry-binom-coeff}) by
+(\ref{eq:binom-coeff}) plus the commutativity of multiplication (see
+Section~\ref{sec:Arithmetic-Laws}),
+\begin{eqnarray*}
+{n \choose k} & = & \frac{n!}{k!(n-k)!} \\
+              & = & \frac{n!}{(n-k)!k!} \\
+              & = & {n \choose {n-k}}
+\end{eqnarray*}
+
+\noindent ($b$)
+We verify equation (\ref{eq:add-binom-coeff}) by explicitly adding the
+fractions exposed by (\ref{eq:binom-coeff}):
+\begin{eqnarray*}
+{n \choose k} \ + \ {n \choose {k+1}}
+  & = &
+\frac{n!}{k!(n-k)!} \ + \ \frac{n!}{(k+1)!(n-k-1)!} \\
+  & = &
+n! \cdot \frac{(k+1) + (n-k)} {(k+1)!(n-k)!} \\
+  & = & 
+\frac{(n+1)!}{(k+1)!(n-k)!} \\
+  & = &
+{{n+1} \choose {k+1}} \hspace*{2in} \qed
+\end{eqnarray*}
+
+Extrapolating from Proposition~\ref{thm:manipulate-binom-coeff}, we now
+present {\it Pascal's triangle}, named in honor of
+\index{Pascal's triangle}
+\index{Pascal, Blaise}
+the French polymath Blaise Pascal.  Fig.~\ref{fig:pascal-triangle}
+provides a ``prefix'' of this famed array of integers, for $n,k \leq
+5$.
+\begin{figure}[htb]
+\[
+\begin{array}{c||r|r|r|r|r|r|r}
+{\displaystyle {n \choose k}} & k=0 & k=1 & k=2 & k=3 & k=4 & k=5 &\ldots \\
+\hline
+\hline
+n=1 & 1 & 1 &    &    &    &   & \ldots \\
+\hline
+n=2 & 1 & 2 & 1  &    &    &   & \ldots \\
+\hline
+n=3 & 1 & 3 & 3  & 1  &    &   & \ldots \\
+\hline
+n=4 & 1 & 4 & 6  & 4  & 1  &   & \ldots \\
+\hline
+n=5 & 1 & 5 & 10 & 10 & 5  & 1 & \ldots \\
+\hline
+\vdots &\vdots &\vdots &\vdots &\vdots &\vdots &\vdots &\ddots
+\end{array}
+\]
+\caption{A ``prefix'' of Pascal's Triangle, for $n,k \leq 5$.}
+\label{fig:pascal-triangle}
+\end{figure}
+The formation rule of the array is:
+\begin{description}
+\item[\small\sf Formation rule for Pascal's triangle:]
+% 
+{\it The entry at (row $n+1$, column $k+1$) is the sum of the entries
+  at (row $n$, column $k$) and (row $n$, column $k+1$).}
+\end{description}
+\qed
+\end{proof}
+
+
+If you compare the formation rule for Pascal's triangle with equation
+(\ref{eq:add-binom-coeff}), then you may anticipate the following
+result.
+
+\addcontentsline{toc}{paragraph}{-- A fun result: Pascal's triangle
+  and the binomial coefficients}
+
+\begin{prop}
+\label{thm:pascal-binom}
+The entries of Pascal's triangle are the binomial coefficients.
+Specifically, for all $n,k$, the entry at (row $n$, column $k$) of the
+Triangle is $\displaystyle {n \choose k}$.
+\end{prop}
+
+\begin{proof}
+We note by observation and direct calcullation (see
+Fig.~\ref{fig:pascal-triangle}) that the proposition is true for $n =
+1$ and $k \in \{0, 1\}$.  A simple double induction
+
+\noindent
+****************** \\
+induction on $n$, then for each value of $n$ on $k \leq n$ \\
+SHOULD WE SPELL THIS OUT IN DETAIL?  GIVE AS AN EXERCISE? \\
+******************
+
+\noindent
+verifies that every binomial coefficient appears in the Triangle and
+every Triangle entry is a binomial coefficient.  \qed
+\end{proof}
+
+\medskip
+
+\addcontentsline{toc}{paragraph}{-- A fun result: Binomial
+  coefficients are integers}
+
+\begin{prop}
+\label{thm:binomcoeff-integer}
+Every binomial coefficient is an integer.
+\end{prop}
+
+\begin{proof}
+Since every entry in Pascal's triangle is obtained from integers via
+repeated additions, this result follows from
+Proposition~\ref{thm:pascal-binom}.  \qed
+\end{proof}
+
+\bigskip
+
+Binomial coefficients are indispensable when studying myriad topics
+related to {\em counting}, such as:
+\begin{itemize}
+\item
+what are the relative likelihoods of various $5$-card deals from a
+fair $52$-card deck?
+\item
+What is the likelihood of observing $15$ {\sc head}s and $25$ {\sc
+  tail}s in $40$ flips of a fair coin?
+\item
+What are the comparative operation-count costs of Merge-Sort and
+Quick-Sort when sorting $n$ keys; cf.~\cite{CLRS}?
+
+\end{itemize}
+We shall, therefore, see a lot more about binomial coefficients in
+Section~\ref{sec:powers+polynolmials} and Chapter~\ref{ch:prob-stat}.
+With each subsequent encounter, our respect for these numbers will
+grow.
+
+
+\subsection{The Laws of Arithmetic, and applications}
+\index{arithmetic!basic laws}
 \label{sec:Arithmetic-Laws}
 
 The student should understand the following laws of arithmetic on the
 reals, rationals, and reals---and be able to employ them cogently in
 rigorous argumentation.
-\begin{itemize}
-\item
-{\it The commutative law}.\index{commutative law!arithmetic}
+
+\medskip
+
+\addcontentsline{toc}{paragraph}{A. The commutative law}
+\noindent {\small\sf A. The commutative law.}
+\index{commutative law!arithmetic}
 \index{commutative law!addition}
 \index{commutative law!multiplication}
 \index{arithmetic!commutative law}
@@ -1294,9 +2181,12 @@ For all numbers $x$ and $y$:
 \end{array}
 \]
 
-\item
-{\it The associative law}.\index{associative law for
-  arithmetic}\index{arithmetic!associative law}
+\medskip
+
+\addcontentsline{toc}{paragraph}{B. The associative law}
+\noindent {\small\sf B. The associative law}
+\index{associative law for arithmetic}
+\index{arithmetic!associative law}
 %
 For all numbers $x$, $y$, and $z$,
 \[ (x+y)+z \ = \ x+(y+z) \ \ \ \mbox{\bf and } \ \ 
@@ -1305,9 +2195,12 @@ x\cdot (y\cdot z)
 This allows one, for instance, to write strings of additions or of
 multiplications without using parentheses for grouping.
 
-\item
-{\it The distributive law}.\index{distributive law for
-  arithmetic}\index{arithmetic!distributive law}
+\medskip
+
+\addcontentsline{toc}{paragraph}{C. The distributive law}
+\noindent  {\small\sf C. The distributive law.}
+\index{distributive law for arithmetic}
+\index{arithmetic!distributive law}
 %
 For all numbers $x$, $y$, and $z$,
 \begin{equation}
@@ -1316,7 +2209,8 @@ x \cdot (y + z) \ = \ (x \cdot y) + (x \cdot z).
 \end{equation}
 One commonly articulates this law as, ``{\em Multiplication
   distributes over addition.}''
-\end{itemize}
+
+
 One of the most common uses of the distributive law reads equation
 (\ref{eq:distr-law}) ``backwards,'' thereby deriving a formula for
 {\em factoring} \index{arithmetic!factoring} complex expressions that
@@ -1344,8 +2238,7 @@ For all numbers $a, b, c, d$:
 \end{equation}
 \end{prop}
 
-\noindent {\it Verification}.
-%
+\begin{proof}
 Note first that because multiplication takes priority over addition,
 the absence of parentheses in expressions such as
 (\ref{prop:(a+b)(c+d)}) does not jeopardize unambiguity.  Our proof of
@@ -1366,6 +2259,8 @@ times.
 \end{array}
 \]
 \qed
+\end{proof}
+
 
 We close our short survey of the laws of arithmetic with the following
 important two-part law.
@@ -1410,7 +2305,7 @@ Examples of Proposition ~\ref{thm:75x65=4925} include
 $25^2 = 625$ (because $2 \cdot 3 = 6$) and $75^2 = 5625$ (because $7
 \cdot 8 = 56$).
 
-\noindent {\it Verification} (for general $\delta$).
+\begin{proof} (for general $\delta$).
 %
 We invoke Proposition~\ref{prop:(a+b)(c+d)} and the distributive law.
 \[
@@ -1425,6 +2320,8 @@ n^2 & = & (10 \cdot \delta + 5)^2 & & \mbox{Given} \\
 \end{array}
 \]
 \qed
+\end{proof}
+
 
 \subsection{Rational Arithmetic: A Worthwhile Exercise}
 \label{sec:Rational-arithmetic}
@@ -1498,7 +2395,10 @@ required amount of manipulation.
 \section{Basic Algebraic Concepts and Their Manipulations}
 
 \subsection{Powers and polynomials}
+\label{sec:powers+polynolmials}
 
+\subsubsection{Raising a number to a power.}
+\label{sec:x-toa-power}
 A conceptually powerful notational construct is the operation of {\it
   raising a number to a power:}\index{raising a number to a power}
 %
@@ -1557,13 +2457,153 @@ a^b.
 Summing up, we now know about powers that are integral or fractional,
 positive, zero, or negative
 
-We want the student to master the notions of polynomials and their
+\subsubsection{Polynomials and their roots.}
+\label{sec:poly-roots}
+We want students to master the notions of polynomials and their
 associated notions, such as degrees and coefficients, and computations
 therewith, including polynomial summation and multiplication.  While
 polynomial multiplication is often considered ``non-elementary'', it
 must be mastered in order to fully understand positional number
 systems; it is also essential, e.g., when discussing a range of topics
 relating to, say, fault tolerance and encryption).
+
+\index{The Fundamental Theorem of Algebra}
+\begin{theorem}[The Fundamental Theorem of Algebra]
+Every degree-$n$ univariate polynolmial with complex coefficients has
+$n$ complex roots 
+\end{theorem}
+
+\index{The Binomial Theorem}
+\subsubsection{The Binomial Theorem.}
+\label{sec:Binomial-thm}
+%
+Perhaps the simplest bivariate polynomials are the ones in the
+following family.
+\begin{equation}
+\label{eq:binomial-polys}
+\mbox{For } \ n \in \N^+, \hspace*{.5in}
+P_n(x,y) \ \eqdef \ (x+y)^n.
+\end{equation}
+There are lessons to be learned from the structure of these
+polynomials, so let us begin to expand them using the arithmetic
+techniques we have learned earlier.
+\begin{eqnarray*}
+P_1(x,y) \ = \
+(x+y)^1 & = & x+y  \\
+P_2(x,y) \ = \
+(x+y)^2 & = & (x+y) \cdot (x+y) \\
+        & = & x^2 + 2xy + y^2 \\
+P_3(x,y) \ = \
+(x+y)^3 & = & (x+y) \cdot (x^2 + 2xy + y^2) \\
+   & = & (x^3 + 2x^2y +  xy^2) + (x^2y + 2xy^2 + y^3) \\
+   & = & x^3 + 3x^2y + 3xy^2 + y^3  
+\end{eqnarray*}
+
+Let us stop to review what we are seeing.  We have remarked before
+that doing mathematics can sometimes involve a wonderfully exciting
+(quite sophisticated) pattern-matching game.  So, let us pattern-match!
+\begin{enumerate}
+\item
+The coefficients of the expanded $P_1(x,y)$ are $\langle 1,1 \rangle$.
+\item
+The coefficients of the expanded $P_2(x,y)$ are $\langle 1,2,1 \rangle$.
+\item
+The coefficients of the expanded $P_3(x,y)$ are $\langle 1,3,3,1 \rangle$.
+\end{enumerate}
+There is a pattern emerging here.  Can you spot it?  Where have we
+seen a pattern of tuples that begins in the same manner?  As a rather
+broad hint, look at Fig.~\ref{fig:pascal-triangle}!  Could the
+coefficients of each $P_n$ possibly be the successive binomial
+coefficients
+\[ {n \choose 0}, \ {n \choose 1}, \ \ldots, \ {n \choose {n-1}}, \ {n
+  \choose n}
+\]
+Let us use induction to explore this possibility by expanding a
+generic $P_n$ with symbolic ``dummy'' coefficients and see what this
+says about $P_{n+1}$.  To this end, let $a_{n,n-r}$ denote the
+coefficient of $x^{n-r} y^r$ in the expansion of $P_n(x,y)$.  Using
+our ``dummy'' coefficients, we have
+\[ 
+\begin{array}{l}
+P_n(x,y) \ = \
+ x^n \ + \ \cdots \ + \ a_{n,n-r} x^{n-r} y^r
+    \ + \ a_{n,n-r-1} x^{n-r-1} y^{r+1} \\
+\hspace*{1in} + \ a_{n,n-r-2} x^{n-r-2} y^{r+2}
+ \ + \ \cdots \ + \ y^n
+\end{array}
+\]
+Continuing with this symbolic evaluation, we have:
+\begin{equation}
+\label{eq:xPk}
+\begin{array}{l}
+x \cdot P_n(x,y) \ = \
+ x^{n+1} \ + \ \cdots \ + \ a_{n,n-r} x^{n-r+1} y^r
+    \ + \ a_{n,n-r-1} x^{n-r} y^{r+1} \\
+\hspace*{1in} + \ a_{n,n-r-2} x^{n-r-1} y^{r+2}
+ \ + \ \cdots \ + \ xy^n
+\end{array}
+\end{equation}
+and
+\begin{equation}
+\label{eq:yPk}
+\begin{array}{l}
+y \cdot P_n(x,y) \ = \
+ x^n y \ + \ \cdots \ + \ a_{n,n-r} x^{n-r} y^{r+1}
+    \ + \ a_{n,n-r-1} x^{n-r-1} y^{r+2} \\
+\hspace*{1in} + \ a_{n,n-r-2} x^{n-r-2} y^{r+3}
+ \ + \ \cdots \ + \ y^{n+1}
+\end{array}
+\end{equation}
+Because
+\[ P_{n+1}(x+y) \ = \ (x+y) \cdot P_n(x,y)
+                \ = \ x \cdot P_n(x,y) \ + \ y \cdot P_n(x,y),
+\]
+the ``dummy'' coefficient $a_{n-r+1,r}$ of $x^{n-r+1} y^r$ in
+$P_{n+1}(x+y)$ is the sum of the following coefficients in $P_n(x,y)$:
+\begin{center}
+$\bullet$
+the coefficient $a_{n,n-r}$ of $x^{n-r}y^r$ \ \ \ \ \
+and \ \ \ \ \
+$\bullet$
+the coefficient $a_{n,n-r+1}$ of $x^{n-r+1}y^{r-1}$
+\end{center}
+By induction, then, for all $n,r \in \N$ with $r \leq n$,
+\[ a_{n,r} + a_{n,r+1} \ = \ a_{n+1,r+1} \]
+Combining this equation with the observed initial conditions
+\[ a{1,0} \ = \ a_{1,1} \ = \ 1 \]
+we see that each coefficient $a_{n,r}$ is actually the binomial
+coefficient $\displaystyle {n \choose r}$.  This observation is
+attributed to the renowned English mathematician/physicist Isaac
+Newton and is enshrined in Newton's famous {\it Binomial Theorem}.
+
+\ignore{**********
+so that, finally,
+\begin{eqnarray*}
+             & = &
+ x^{k+1} \ + \ (k+1) x^k y \ + \ \cdots \ + \
+   (a_{k,k-r-1} + a_{k,k-r}) x^{k-r} y^{r+1} \\
+             &   & \ \ \ + \
+   (a_{k,k-r-2} + a_{k,k-r-1}) x^{k-r-1} y^{r+2}
+ \ + \ \cdots \ + \ (k+1) xy^k \ + \ y^{k+1} \\
+      & = &
+ x^{k+1} \ + \ (k+1) x^k y \ + \ \cdots \ + \
+ a_{k+1,k-r} x^{k-r} y^{r+1} \\
+            &    & \ \ \ + \  a_{k+1,k-r-1} x^{k-r-1} y^{r+2}
+ \ + \ \cdots \ + \ (k+1) xy^k \ + \ y^{k+1}
+\end{eqnarray*}
+*******}
+
+\begin{theorem}[The Binomial Theorem]
+For all $n \in \N$,
+\[
+(x+y)^n \ = \
+\sum_{i=0}^n \ \ {n \choose i} x^{n-i} y^i.
+\]
+\end{theorem}
+\index{The Binomial Theorem!binomial coefficients}
+\index{binomial coefficients!The Binomial Theorem}
+
+
 
 \subsection{Exponentials and Logarithms}
 
@@ -1639,8 +2679,7 @@ For any base $b >1$, for all numbers $x >0$, $y>0$,
 \[ \log_b (x \cdot y) \ = \ \log_b x \ + \ \log_b y \]
 \end{prop}
 
-\noindent {\it Verification}.
-%
+\begin{proof}
 Definition (\ref{eq:logarithm-defn}) tells us that $x = b^{\log_b x}$
 and $y = b^{\log_b y}$.  Therefore,
 \[ x \cdot y \ = \ b^{\log_b x} \cdot b^{\log_b y} \ = \
@@ -1648,6 +2687,9 @@ b^{\log_b x \ + \ \log_b y}, \]
 by the laws of powers.  Taking base-$b$ logarithms of the first and
 last terms in the chain yields the claimed equation.
 \qed
+\end{proof}
+
+
 
 Many students believe that the following result is a {\em convention}
 rather than a consequence of the basic definitions.  {\em The logarith
@@ -1658,44 +2700,42 @@ For any base $b >1$,
 \[ \log_b 1 \ = \ 0 \]
 \end{prop}
 
-\noindent {\it Verification}.
-%
+\begin{proof}
 We note the following chain of equalities.
 \[  b^{\log_b x} \ = \ b^{\log_b (x \cdot 1)} 
 \ = \ b^{(\log_b x) + (\log_b 1)} 
 \ = \ b^{\log_b x} \cdot b^{\log_b 1}
 \]
 Hence, $b^{\log_b 1} \ = \ 1$.  If $\log_b 1$ did not equal $0$, then
-$b^{\log_b 1}$ would exceed $1$.
-\qed
+$b^{\log_b 1}$ would exceed $1$.  \qed
+\end{proof}
 
 \begin{prop}
 For all bases $b > 1$ and all numbers $x, y$,
 \[ x^{\log_b y} \ = \ y^{\log_b x} \]
 \end{prop}
 
-\noindent {\it Verification}.
-%
+\begin{proof}
 We invoke (\ref{eq:logarithm-defn}) twice to remark that
 \[ \left[x^{\log_b y} \ = \ b^{(\log_b x) \cdot (\log_b y)}\right]
 \ \ \mbox{ and } \ \ 
 \left[y^{\log_b x}\ = \ b^{(\log_b y) \cdot (\log_b x)}\right] \]
-The commutativity of addition completes the verification.
-\qed
+The commutativity of addition completes the verification.  \qed
+\end{proof}
 
 \begin{prop}
 For any base $b >1$,
 \[ \log_b (1/x) \ = \ - \log_b x \]
 \end{prop}
 
-\noindent {\it Verification}.
-%
+\begin{proof}
 This follows from the fact that $\log_b 1 =0$, coupled with the
 product law for logarithms.
 \[ \log_b x + \log_b (1/x) \ = \ \log_b (x \cdot (1/x))
 \  = \ \log_b 1 \ = \ 0 
 \]
 \qed
+\end{proof}
 
 \begin{prop}
 For any bases $a, b >1$,
@@ -1705,8 +2745,7 @@ For any bases $a, b >1$,
 \end{equation}
 \end{prop}
 
-\noindent {\it Verification}.
-%
+\begin{proof}
 We begin by noting that, by definition,
 Note that
 \begin{equation}
@@ -1728,7 +2767,8 @@ From the third expression in (\ref{eq:log-exp-1}), we find that
 \end{equation}
 We know from (\ref{eq:log-exp-1}) that the righthand expressions in
 (\ref{eq:log-exp-2}) and (\ref{eq:log-exp-3}) are equal, whence
-(\ref{eq:log-exp-0}) \qed
+(\ref{eq:log-exp-0}).   \qed
+\end{proof}
 
 If we set $x = b$ in (\ref{eq:log-exp-0}), then we find the following
 marvelous equation.
@@ -1741,7 +2781,6 @@ For any integers $a, b >1$,
 \log_b a \ = \ \frac{1}{\log_a b} .
 \end{equation}
 \end{prop}
-
 
 
 \subsubsection{Exponentials and logarithms within information theory}
@@ -1759,8 +2798,7 @@ over an alphabet of $a$ letters.  Then at least one string-label must
 have length no shorter than $\lceil \log_a n \rceil$.
 \end{prop}
 
-\noindent {\em Verification.}
-%
+\begin{proof}
 Let $Sigma$ be an alphabet of $a$ letters/symbols.  For each integer
 $k \geq 0$ (i.e., for each $k \in \N$), let $\Sigma^{(k)}$ denote the
 set of all length-$k$ strings over $\Sigma$.  The bound of
@@ -1826,8 +2864,8 @@ For each $\ell \in \N$,
 for some constant $c$.  In order for this quantity to reach $n \in
 \N$, we must have
 \[ \ell \ > \ d \cdot \log_{|\Sigma|} n   \]
-for some small constant $d$.
-\qed
+for some small constant $d$.  \qed
+\end{proof}
 
 **HERE
 
@@ -1851,8 +2889,8 @@ The ability to sum -- and perhaps approximate -- simple series,
 including, {\em at least}, finite arithmetic series and both finite
 and infinite geometric series.
 
-\addcontentsline{toc}{paragraph}{A. Arithmetic sequences and series}
-\noindent {\small\sf A. Arithmetic sequences and series.}
+\subsubsection{Arithmetic sequences and series.}
+\label{sec:arithmetic-series}
 %
 We define arithmetic sequences and learn how to calculate their sums.
 
@@ -1870,26 +2908,52 @@ an + b \cdot (1 + 2 + \cdots + n-1)
 \end{equation}
 We can, thus, sum the arithmetic series in (\ref{eq:arith-seq}) by
 determining the sum of the first $m$ positive integers; $m = n-1$ in
-(\ref{eq:arith-seq}).  We accomplish this via a device known to Karl
-Friedrich Gauss as a pre-teen.  Let $S_m$ denote the desired sum.
+(\ref{eq:arith-seq}).  We use this result as an opportubnity to
+introduce important notation.
+
+\addcontentsline{toc}{paragraph}{-- A fun result: Summing the first
+  $n$ integers}
+
+\begin{prop}
+\label{thm:sum-first-integers-Gauss}
+For all $n \in \N$,
+\begin{eqnarray}
+\nonumber
+S_n \ \eqdef \ \sum_{i=1}^n \ i
+ & \eqdef &
+ 1 + 2 + \cdots + (n-1) + n \\
+\label{eq:sum-1-to-n}
+ & = & {1 \over 2} n (n+1) \\
+\nonumber
+ & = & {{n+1}  \choose 2}.
+\end{eqnarray}
+\end{prop}
+
+\begin{proof}
+The {\em constructive} proof\footnote{The proof is {\em constructive}
+  in that it actually derives an answer.  This is in contrast to the
+  inductive proof of Proposition~\ref{thm:sum-1-to-n-induction}, which
+  just verifies a ``guessed'' answer.}~of summation
+(\ref{eq:sum-1-to-n}) that we present now employs a device known to
+the eminent German mathematician Karl Friedrich Gauss \index{Gauss,
+  Karl Friedrich} as a pre-teenager.
 \begin{equation}
 \label{eq:arith-series}
-\begin{array}{lccccccccc}
-\multicolumn{10}{l}{\mbox{Write the sum $S_m$ ``forward'':}} \\
-\hspace*{.5in}S_m = & 1 & + & 2   & + & \cdots & + & (m-1) & + & m \\
-\multicolumn{10}{l}{\mbox{Write $S_m$ in reverse:}} \\
-\hspace*{.5in}S_m = & m & + & (m-1) & + & \cdots & + & 2     & + & 1
+\begin{array}{llccccccccc}
+\mbox{Write $S_n$ ``forwards'':} &
+\hspace*{.25in}\sum_{i=1}^n \ = & 1 & + & 2   & + & \cdots & + & (n-1) & + & n \\
+ & & & & & & & & & &  \\
+\mbox{Write $S_n$ ``in reverse'':} &
+\hspace*{.25in}\sum_{i=1}^n \ = & n & + & (n-1) & + & \cdots & + & 2     & + & 1
 \end{array}
 \end{equation}
-Now add the two versions of $S_m$ in (\ref{eq:arith-series}) {\em
-  columnwise}.  Because each column-sum equals $m+1$, we find that
-$2S_m = m(m+1)$, so that
-\begin{equation}
-\label{eq:arith-sum}
-S_m  \ = \
-1 + 2 + \cdots + (m-1) + m \ = \ {1 \over 2} m (m+1) \ 
-\eqdef \ {{m+1}  \choose 2}.
-\end{equation}
+Now add the two versions of $S_n$ in (\ref{eq:arith-series}) {\em
+  columnwise}.  Because each of the $n$ column-sums equals $n+1$, we
+find that $2 S_n = n(n+1)$, which we easily rewrite as in
+(\ref{eq:sum-1-to-n}) (after multiplying both sides of the equation by
+$2$).   \qed
+\end{proof}
+
 It follows that our original series in (\ref{eq:arith-seq}) sums as
 follows.
 \[
@@ -1897,8 +2961,83 @@ a + (a+b) + (a+2b) + (a+3b) + \cdots + (a+(n-1)b) \ = \
 an + b \cdot {n \choose 2}. 
 \]
 
-\addcontentsline{toc}{paragraph}{B. Geometric sequences and series}
-\noindent {\small\sf B. Geometric sequences and series.}
+\medskip
+
+We can use Proposition~\ref{thm:sum-first-integers-Gauss} to craft
+{\em two} ``constructive'' proofs---i.e., proof that explicitly
+calculate the summation---that each perfect square, say, $m^2$, is the
+sum of the first $m$ odd integers, $1, 3, 5, \ldots, 2m-1$.  These
+proofs complement the ``guess-and-verify'' inductive proof of the same
+result in Proposition~\ref{thm:squares-odd-integers-induction}.
+
+\addcontentsline{toc}{paragraph}{-- A fun result: The $n$th perfect
+  square is the sum of the first $n$ odd integers (two proofs)}
+
+\begin{prop}
+\label{thm:squares-odd-integers-Gauss}
+For all $n \in \N^+$,
+\begin{equation}
+\label{eq:sum-of-odds}
+\sum_{k=1}^n \ (2k-1)
+ \ = \ 1 + 3 + 5 + \cdots + (2n-1) \ = \ n^2.
+\end{equation}
+That, is, the $n$th perfect square is the sum of the first $n$ odd
+integers.
+\end{prop}
+
+Before presenting our two proofs of this result, we note that the
+notation in (\ref{eq:sum-of-odds}) is perfectly general: every positive
+odd integer $m$ can be written in the form $2n-1$ for some positive
+integer $n$.
+
+\smallskip
+
+\begin{proof}
+({\it Argument \#1}.)
+%
+By direct calculation, we have
+\begin{eqnarray*}
+\sum_{k=1}^n \ \left( 2k-1 \right)
+   & = & 2 \sum_{k=1}^n \ k \ \ - \ n \\
+   & = & 2 \frac{n (n+1)}{2} \ \ - \ n \ \ \ \ \mbox{ by
+  Proposition~\ref{thm:sum-first-integers-Gauss}} \\
+   & = & (n^2 + n) - n \\
+   & = & n^2. \hfill \qed
+\end{eqnarray*}
+\end{proof}
+
+\medskip
+
+\begin{proof}
+({\it Argument \#2}.)
+%
+Let us adapt Gauss's ``trick'' to this problem.  Let us denote the
+target sum $\sum_{k=1}^n \ (2k-1)$ by $S_n$. 
+\begin{equation}
+\label{eq:add-odds}
+\begin{array}{llccccccccc}
+\mbox{$S_n$ ``forwards'':} &
+S_n \ = 
+& 1 & + & 3 & + & \cdots & + & (2n-3) & + & (2n-1) \\
+ & & & & & & & & & &  \\
+\mbox{$S_n$ ``in reverse'':} &
+S_n \ =
+& (2n-1) & + & (2n-3) & + & \cdots & + & 3 & + & 1
+\end{array}
+\end{equation}
+Now add the two versions of $\sum_{k=1}^n \ (2k-1)$ in (\ref{eq:add-odds})
+{\em columnwise}.  Because each of the $n$ column-sums equals $2n$, we
+find that
+\begin{equation}
+\label{eq:sum-of-odds-sum}
+2 \sum_{k=1}^n \ (2k-1) \ = \ 2n^2.
+\end{equation}
+We thus derive the desired summation (\ref{eq:sum-of-odds}) when we
+divide both sides of equation (\ref{eq:sum-of-odds-sum}) by $2$.  \qed
+\end{proof}
+
+\subsubsection{Geometric sequences and series.}
+\label{sec:geometric-sums}
 %
 We define geometric sequences and learn how to calculate their sums.
 
@@ -1964,14 +3103,15 @@ S^{b>1}_{b}(n) \ \approx \ \frac{b^n}{b-1} \ \ \
 S^{b<1}_{b}(n) \ \approx \ \frac{1}{1-b} .
 \end{equation}
 
-\bigskip
+\medskip
 
-\addcontentsline{toc}{paragraph}{C. An amusing result about numerals}
-\noindent {\small\sf C. An amusing result about numerals.}
-%
-We illustrate a somewhat surprising nontrivial fact about integers
-that are ``encoded'' in their positional numerals.  We hope that this
-``fun'' result will inspire the reader to seek kindred numeral-encoded
+\addcontentsline{toc}{paragraph}{-- A fun result: When is an integer
+  divisible by $9$?}
+
+We now exploit our ability to sum geometric sums to illustrate a
+somewhat surprising, nontrivial fact about integers that are
+``encoded'' in their positional numerals.  We hope that this ``fun''
+result will inspire the reader to seek kindred numeral-encoded
 properties of numbers.
 
 \begin{prop}
@@ -1987,7 +3127,8 @@ traditional use of base-$10$ (decimal) numerals. \\
 
 \smallskip
 
-\noindent {\it Verification} (for general base $b$).
+\begin{proof}
+({\it Argument for general base $b$}).
 %
 Of course, we lose no generality by focusing on numerals without
 leading $0$'s, for adding leading $0$'s does not alter a numeral's sum
@@ -2030,10 +3171,14 @@ therefore, that the lefthand expression, $n - s_b(n)$, is also
 divisible by $b-1$.  An easy calculation, which we leave to the
 reader, now shows that this final fact means that $n$ is divisible by
 $b-1$ if, and only if, $s_b(n)$ is.  \qed
+\end{proof}
 
+\subsection{Deriving and Solving Linear Recurrences}
+\label{sec:linear-recurrences-2}
 
-\subsection{Linear recurrences}
-\label{sec:linear-recurrences}
+While we have discussed already discussed the use of linear
+recurrences in Section~\ref{sec:linear-recurrences-1}, we derive the
+underlying mathematics in this section
 
 By the time the reader has reached this paragraph, she has the
 mathematical tools necessary to prove and apply what is called {\it
@@ -2101,8 +3246,7 @@ The segment of (\ref{eq:Lin-Recur:expand}) ``hidden'' by the vertical
 dots betokens an induction that is left to the reader.  Equations
 (\ref{eq:geom-sum:b>1}) and (\ref{eq:geom-sum:b<1}) now enable us to
 demonstrate that (\ref{eq:Lin-Recur:solve}) is the case-structured
-solution to (\ref{eq:Lin-Recur:start}).
-\qed
+solution to (\ref{eq:Lin-Recur:start}).  \qed
 \end{proof}
 
 
@@ -2117,8 +3261,7 @@ For every integer $b > 1$, there are $b^n$ $b$-ary strings of length
 $n$.
 \end{prop}
 
-\noindent {\it Verification.}
-%
+\begin{proof}
 The asserted numeration follows most simply by noting that there are
 always $b$ times as many $b$-ary strings of length $n$ as there are of
 length $n-1$.  This is because we can form the set of $b$-ary strings
@@ -2131,14 +3274,19 @@ $A^{(b-1)}_{n-1}$.  The thus-amended sets $A^{(i)}_{n-1}$ are mutually
 disjoint (because of the terminal letters of their respective
 strings), and they collectively contain all $b$-ary strings of length
 $n$.  \qed
+\end{proof}
+
+\medskip
+
+\addcontentsline{toc}{paragraph}{-- A fun result: $n$-element sets
+  have $2^n$ subsets}
 
 \begin{prop}
 \label{thm:power-sets}
 The power set $\p(S)$ of a finite set $S$ contain $2^{|S|}$ elements.
 \end{prop}
 
-\noindent {\it Verification.}
-%
+\begin{proof}
 Let us begin by taking an arbitrary finite set $S$---say of $n$
 elements---and laying its elements out in a line.  We thereby
 establish a correspondence between $S$'s elements and positive
@@ -2185,6 +3333,7 @@ Back to the Proposition: We have verified the following: {\em The
   elements in the power set of $S$!}  The desired numeration thus
 follows by the ($b=2$) instance of Proposition~\ref{thm:b-ary
   strings}.  \qed
+\end{proof}
 
 \begin{quote}
 The binary string that we have constructed to represent each set of

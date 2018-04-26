@@ -1,4 +1,4 @@
-%version of 03-14-18
+%version of 04-11-18
 
 \chapter{SETS, BOOLEAN ALGEBRA, AND LOGIC}
 
@@ -581,18 +581,27 @@ traditionally write ``$F: S \rightarrow T$'' as shorthand for the
 assertion, ``$F$ is a function from the set $S$ to the set $T$''; we
 also traditionally write ``$F(s) = t$'' for the more conservative
 ``$sFt$.''  (The single-valuedness of $F$ makes the nonconservative
-notation safe.)  We often call the set $S$ the {\em source (set)} and
-$T$ the {\em target (set)} for function $F$.  When there is always a
-(perforce, unique) $t \in T$ for each $s \in S$, then we call $F$ a
-{\em total} function.
-\ignore{*******
+notation safe.)  We often call the set $S$ the {\em source (set)},
+\index{function!source set}
+or, the {\it domain}
+\index{function!domain}
+%
+of function $F$, and we call set $T$ the {\em target (set)}
+\index{function!target set}
+or, the {\it range}
+\index{function!range}
+%
+of function $F$.  When there is always a (perforce, unique) $t \in T$
+for each $s \in S$, then we call $F$ a {\em total} function.
+
+\ignore{******* 
 Note that our terminology is a bit unexpected: {\em Every total
   function is a partial function;} that is,
 ``partial''\index{function!partial} is the generic term, and ``total''
 is a special case.
 *********}
 
-You may be surprisedf to encounter functions that are not total,
+You may be surprised to encounter functions that are not total,
 because most of the functions you deal with daily are {\em total}.
 Our mathematical ancestors had to do some fancy footwork in order to
 make your world so neat.  Their choreography took two complementary
@@ -657,6 +666,31 @@ at most one $s \in S$ such that $F(s) = t$;
 \end{itemize}
 
 An injective function $F$ is called an {\it injection}.
+
+\smallskip
+
+Importantly, each injection $F$ has a {\it functional inverse},
+\index{inverse of an injection}
+%
+which is commonly denoted $F^{-1}$.
+\index{$F^{-1}$: functional inverse of injection $F$}
+%
+and which is defined as follows.  For each $t \in T$:
+  \begin{itemize}
+  \item
+If there is an $s \in S$ such that $F(s) = t$, then
+\[ F^{-1}(t) \ = \ s \]
+
+  \item
+If there is no $s \in S$ such that $F(s) = t$, then $F^{-1}(t)$ is not defined.
+  \end{itemize}
+Because $F$ is an {\em injection}, there is at most $s \in S$ such
+that $F(s)= t$.  In other words, an element $t \in T$ can occur in the
+range of $F$ only because of a single element $s \in S$ in the domain
+of $F$.  This means that the preceding definition of $F^{-1}$ is a
+valid definition (it is ``well-defined'') and that $F^{-1}$ is a
+(partial) function $F^{-1}: T \rightarrow S$ whose domain is the range
+of $F$.
 
 \item
 {\it onto} (or {\it surjective}) if for each $t \in T$, there is at
@@ -728,8 +762,34 @@ is multiplied by $b^{i+1}$.
 \end{quote}
 *********}
 
-A bijective function $F$ is called a {\it bijection}.
+A bijective function $F$ is called a {\it bijection}.  When $F$ is a
+bijection from $S$ onto $T$, we often write $F: S \leftrightarrow T$.
 \end{enumerate}
+There is a marvelous theorem that must be mentioned here, even though
+it is beyond the scope of the book.\footnote{The theorem can be found
+  in texts such as \cite{Birkhoff-MacLane53}.}
+\index{The Schr\"{o}der-Bernstein Theorem}
+%
+The theorem says that, given sets $S$ and $T$: {\em if} there is an
+injection $F_1$ that maps elements of $S$ one-to-one to elements of
+$T$ {\em and} there is an injection $F_2$ that maps elements of $T$
+one-to-one to elements of $S$, {\em then} there is a single bijection
+$F$ such that
+\begin{itemize}
+\item
+$F$ maps elements of $S$ one-to-one to elements of $T$;
+\item
+$F^{-1}$, the {\it functional inverse} of $F$,
+\index{inverse of an injection}
+maps elements of $T$ one-to-one to elements of $S$.
+\end{itemize}
+
+\begin{theorem}[The Schr\"{o}der-Bernstein Theorem]
+For any sets $S$ and $T$, if there is an {\em injection} $F^{(S
+  \rightarrow T)}: S \rightarrow T$ and an {\em injection} $F^{(T
+  \rightarrow S)}: T \rightarrow S$, then there is a {\em bijection}
+$F^{(S \leftrightarrow T)}: S \rightarrow T$.
+\end{theorem}
 
 \medskip
 
@@ -790,8 +850,7 @@ If $F$ and $G$ are surjections, then so also is $F \circ G$.
 If $F$ and $G$ are bijections, then so also is $F \circ G$.
 \end{prop}
 
-\noindent {\it Verification.}
-%
+\begin{proof}
 We prove each of the four assertions by invoking the underlying
 definitions.
 
@@ -862,7 +921,7 @@ injection on $S$, and each is a surjection on $S$.  Then Part (b)
 tells us that $F \circ G$ is an injection on $S$, and Part (c) tells
 us that $F \circ G$ is a surjection on $S$.  Hence, $F \circ G$ is a
 bijection on $S$.  \qed
-
+\end{proof}
 
 
 \section{Boolean Algebras}
@@ -1201,7 +1260,7 @@ For any proposition $P$,
 \[ P \ \ \equiv \ \ \sim [\sim P] \]
 \end{prop}
 
-\noindent {\it Verification via truth table.}
+\noindent {\it Proof via truth table.}
 \begin{equation}
 \label{eq:double-neg}
 \begin{array}{|c|c||c|}
@@ -1240,7 +1299,7 @@ For any propositions $P$ and $Q$,
 \]
 \end{prop}
 
-\noindent {\it Verification via truth table.}
+\noindent {\it Proof via truth table.}
 \begin{equation}
 \label{eq:contraposition}
 \begin{array}{|c|c|c|c||c||c|}
@@ -1301,7 +1360,7 @@ $[ P \vee Q ] \ \ \equiv \ \ \sim [ [\sim P] \wedge [\sim Q]]$
 \end{itemize}
 \end{prop}
 
-\noindent {\it Verification via truth table.}
+\noindent {\it Proof via truth table.}
 \begin{equation}
 \label{eq:DeMorgan}
 \begin{array}{|c|c|c|c||c|c|||c|c|}
@@ -1516,16 +1575,3 @@ answer all questions of the sort we have just posed.  The {\em
   disadvantage} of having such a formal notion is that the way in
 which the notion answers some of our questions may be rather counter
 to one's untutored intuition.
-
-
-
-Converse
-
-Contrapositive
-
-Proof by contradiction\index{Proof by contradiction}
-
-\medskip
-
-\addcontentsline{toc}{paragraph}{A. Integers and the number line}
-\noindent{\small\sf A. Integers and the number line.}
